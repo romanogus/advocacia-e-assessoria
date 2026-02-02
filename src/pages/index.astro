@@ -17,8 +17,8 @@ const areas = await sanityClient.fetch(
 
 <Layout>
 	<section class="min-h-[calc(85vh-4rem)] bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center relative overflow-hidden">
-		<!-- Background scales of justice -->
-		<svg class="absolute right-[385px] top-1/2 -translate-y-1/2 w-[700px] h-[700px] opacity-10" viewBox="0 0 64 64" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+		<!-- Background scales of justice (hidden on mobile) -->
+		<svg class="hidden md:block absolute right-[385px] top-1/2 -translate-y-1/2 w-[700px] h-[700px] opacity-10" viewBox="0 0 64 64" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
 			<!-- Top circle -->
 			<circle cx="32" cy="8" r="4"/>
 			<!-- Vertical post -->
@@ -38,17 +38,17 @@ const areas = await sanityClient.fetch(
 			<line x1="20" y1="56" x2="44" y2="56"/>
 		</svg>
 		<div class="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-r from-amber-700 to-amber-500"></div>
-		<div class="max-w-7xl mx-auto px-8 py-16 w-full">
-			<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+		<div class="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16 w-full">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
 				<!-- Left side - Text content -->
-				<div class="space-y-6">
-					<h1 class="text-5xl lg:text-6xl font-bold text-white leading-tight">
+				<div class="space-y-6 text-center lg:text-left order-2 lg:order-1">
+					<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
 						Paloma Santos
 					</h1>
 					<p class="text-xl text-slate-300">
 						Advocacia e Assessoria Jurídica
 					</p>
-					<div class="flex gap-4 pt-4">
+					<div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
 						<a href="/blog" class="px-6 py-3 bg-white text-slate-900 font-medium rounded-lg hover:bg-slate-100 transition-colors">
 							Ver Artigos
 						</a>
@@ -59,7 +59,7 @@ const areas = await sanityClient.fetch(
 				</div>
 
 				<!-- Right side - Photo -->
-				<div class="flex justify-center lg:justify-end">
+				<div class="flex justify-center lg:justify-end order-1 lg:order-2">
 					<div class="w-72 h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl border-4 border-white/20">
 						<Image 
 							src={heroImage} 
