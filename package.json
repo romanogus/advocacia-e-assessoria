@@ -16,6 +16,7 @@
     "@sanity/astro": "^3.2.11",
     "@sanity/client": "^7.14.1",
     "@sanity/image-url": "^2.0.3",
+    "@sanity/locale-pt-br": "^1.1.27",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.10",
