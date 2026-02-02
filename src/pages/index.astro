@@ -2,6 +2,17 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import heroImage from '../assets/paloma-hero.jpg';
+import { sanityClient } from 'sanity:client';
+
+const areas = await sanityClient.fetch(
+  `*[_type == "areaDeAtuacao"] | order(order asc) {
+    _id,
+    title,
+    description,
+    icon,
+    order
+  }`
+);
 ---
 
 <Layout>
@@ -66,23 +77,21 @@ import heroImage from '../assets/paloma-hero.jpg';
 	</section>
 
 	<!-- Áreas de Atuação Section -->
-	<section id="areas" class="py-20 bg-slate-50">
+	<section id="areas" class="py-20 bg-slate-700">
 		<div class="max-w-7xl mx-auto px-8">
-			<h2 class="text-4xl font-bold text-slate-800 mb-8">Áreas de Atuação</h2>
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-				<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-					<h3 class="text-xl font-semibold text-slate-800 mb-3">Direito Civil</h3>
-					<p class="text-slate-600">Contratos, responsabilidade civil, direito de família e sucessões.</p>
+			<h2 class="text-4xl font-bold text-white mb-8">Áreas de Atuação</h2>
+			{areas.length === 0 ? (
+				<p class="text-slate-300">Nenhuma área de atuação cadastrada.</p>
+			) : (
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+					{areas.map((area: any) => (
+						<div class="bg-slate-800/50 p-6 rounded-xl border border-slate-600">
+							<h3 class="text-xl font-semibold text-white mb-3">{area.title}</h3>
+							<p class="text-slate-300">{area.description}</p>
+						</div>
+					))}
 				</div>
-				<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-					<h3 class="text-xl font-semibold text-slate-800 mb-3">Direito Trabalhista</h3>
-					<p class="text-slate-600">Reclamações trabalhistas, acordos e consultoria empresarial.</p>
-				</div>
-				<div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-					<h3 class="text-xl font-semibold text-slate-800 mb-3">Direito do Consumidor</h3>
-					<p class="text-slate-600">Defesa dos direitos do consumidor e ações contra empresas.</p>
-				</div>
-			</div>
+			)}
 		</div>
 	</section>
 

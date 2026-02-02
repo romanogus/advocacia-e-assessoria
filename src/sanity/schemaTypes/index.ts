@@ -4,8 +4,9 @@ import { author } from "./author";
 import { category } from "./category";
 import { post } from "./post";
 import { service } from "./service";
+import { areaDeAtuacao } from "./areaDeAtuacao";
 import type { SchemaTypeDefinition } from "sanity";
 
-export const schema: { types: SchemaTypeDefinition[]  } = {
-	types: [blockContent, author, category, post, service],
+export const schema: { types: SchemaTypeDefinition[] } = {
+	types: [blockContent, author, category, post, service, areaDeAtuacao],
 };
