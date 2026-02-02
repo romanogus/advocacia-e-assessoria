@@ -1,0 +1,32 @@
+---
+import { sanityClient } from 'sanity:client'
+import { PortableText } from 'astro-portabletext'
+import Layout from '../../layouts/Layout.astro'
+
+const { slug } = Astro.params
+
+const post = await sanityClient.fetch(
+  `*[_type == "post" && slug.current == $slug][0]`,
+  { slug }
+)
+
+if (!post) return Astro.redirect('/404')
+---
+
+<Layout>
+  <article class="max-w-3xl mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-4">{post.title}</h1>
+    
+    {post.excerpt && <p class="text-xl text-gray-600 mb-4">{post.excerpt}</p>}
+    
+    {post.publishedAt && (
+      <time class="text-gray-500 text-sm">
+        {new Date(post.publishedAt).toLocaleDateString('pt-BR')}
+      </time>
+    )}
+
+    <div class="mt-8 prose prose-lg max-w-none">
+      <PortableText value={post.body} />
+    </div>
+  </article>
+</Layout>

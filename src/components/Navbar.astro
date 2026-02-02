@@ -1,0 +1,23 @@
+---
+// Top navigation bar component
+const navItems = [
+  { href: '/', label: 'Início' },
+  { href: '#areas', label: 'Áreas de Atuação' },
+  { href: '#sobre', label: 'Sobre' },
+  { href: '/blog', label: 'Blog' },
+  { href: '#contato', label: 'Contato' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 h-16 bg-gradient-to-r from-slate-900 to-slate-800 px-16 z-50 flex items-center justify-end">
+  <nav class="flex items-center gap-1">
+    {navItems.map((item) => (
+      <a 
+        href={item.href} 
+        class="px-4 py-2 text-lg text-slate-200 rounded-lg font-medium transition-all duration-200 hover:bg-white/10 hover:text-white"
+      >
+        {item.label}
+      </a>
+    ))}
+  </nav>
+</header>
