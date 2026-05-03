@@ -16,10 +16,10 @@ const areas = await sanityClient.fetch(
 // Maps a keyword (lowercase, found anywhere in the title) to a public image path.
 // To add a new area image, just add another entry here.
 const areaBackgrounds: Record<string, string> = {
-  trabalhist: '/direito-trab.png',
-	civil: '/direito-civil.png',
-  // previdenci: '/direito-prev.png',
-  // consumidor: '/direito-cons.png',
+  trabalhist: '/direito-trab.webp',
+  civil: '/direito-civil.webp',
+  // previdenci: '/direito-prev.webp',
+  // consumidor: '/direito-cons.webp',
 };
 
 function getAreaBackground(title: string): string | null {
