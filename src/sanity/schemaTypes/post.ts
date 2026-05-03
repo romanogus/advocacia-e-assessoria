@@ -2,7 +2,7 @@ import { defineType, defineField } from "sanity";
 
 export const post = defineType({
 	name: "post",
-	title: "Artigo",
+	title: "Posts do Blog",
 	type: "document",
 	fields: [
 		defineField({
