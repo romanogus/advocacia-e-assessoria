@@ -7,13 +7,48 @@ const navItems = [
   // { href: '/blog', label: 'Blog' },
   { href: '/#contato', label: 'Contato' },
 ];
+
+const whatsappPhone = "5511955304453";
+const whatsappMessage = "Olá! Gostaria de mais informações sobre os serviços jurídicos.";
+const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(whatsappMessage)}`;
 ---
 
-<header class="fixed top-0 left-0 right-0 h-16 bg-[#D9D8D3] px-4 md:px-16 z-50 flex items-center justify-between md:justify-end">
-  <!-- Hamburger button (mobile only) -->
-  <button 
+<header class="fixed top-0 left-0 right-0 h-16 bg-[#D9D8D3] px-4 md:px-8 z-50 flex items-center justify-between">
+
+  <!-- Left: Brand logo (hidden while hero is visible) -->
+  <a
+    id="brand-logo"
+    href="/"
+    aria-label="Santos & Trevizan — página inicial"
+    class="transition-opacity duration-300"
+  >
+    <img
+      src="/brand-nav.webp"
+      alt="Santos & Trevizan"
+      class="h-8 md:h-9 w-auto object-contain"
+      loading="eager"
+    />
+  </a>
+
+  <!-- Right: Desktop nav -->
+  <div class="hidden md:flex items-center gap-1">
+    <nav class="flex items-center gap-1">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="px-4 py-2 text-base font-medium rounded-lg transition-all duration-200 hover:bg-[#1D2A3D]/10"
+          style="color: #1D2A3D;"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+
+  <!-- Mobile: Hamburger button (right side) -->
+  <button
     id="menu-toggle"
-    class="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-lg hover:bg-white/10 transition-colors"
+    class="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-lg hover:bg-[#1D2A3D]/10 transition-colors"
     aria-label="Menu"
   >
     <span class="hamburger-line w-6 h-0.5 bg-[#1D2A3D] mb-1.5 transition-all duration-300"></span>
@@ -21,28 +56,17 @@ const navItems = [
     <span class="hamburger-line w-6 h-0.5 bg-[#1D2A3D] transition-all duration-300"></span>
   </button>
 
-  <!-- Desktop navigation -->
-  <nav class="hidden md:flex items-center gap-1">
-    {navItems.map((item) => (
-      <a 
-        href={item.href} 
-        class="px-4 py-2 text-lg font-medium rounded-lg transition-all duration-200 hover:bg-[#1D2A3D]/10" style="color: #1D2A3D;"
-      >
-        {item.label}
-      </a>
-    ))}
-  </nav>
-
   <!-- Mobile navigation overlay -->
-  <div 
+  <div
     id="mobile-menu"
     class="fixed inset-0 top-16 bg-[#D9D8D3]/98 backdrop-blur-sm z-40 hidden md:hidden"
   >
     <nav class="flex flex-col items-center justify-center h-full gap-4">
       {navItems.map((item) => (
-        <a 
-          href={item.href} 
-          class="mobile-nav-link px-6 py-3 text-2xl font-medium rounded-lg hover:bg-[#1D2A3D]/10 transition-colors" style="color: #1D2A3D;"
+        <a
+          href={item.href}
+          class="mobile-nav-link px-6 py-3 text-2xl font-medium rounded-lg hover:bg-[#1D2A3D]/10 transition-colors"
+          style="color: #1D2A3D;"
         >
           {item.label}
         </a>
@@ -56,12 +80,29 @@ const navItems = [
   const mobileMenu = document.getElementById('mobile-menu');
   const hamburgerLines = document.querySelectorAll('.hamburger-line');
   const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+  const brandLogo = document.getElementById('brand-logo');
+  const heroSection = document.getElementById('hero');
+
+  // Hide logo while the hero section is visible; show it once scrolled past
+  if (heroSection && brandLogo) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          brandLogo.classList.add('opacity-0', 'pointer-events-none');
+        } else {
+          brandLogo.classList.remove('opacity-0', 'pointer-events-none');
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(heroSection);
+  }
 
   let isOpen = false;
 
   function toggleMenu() {
     isOpen = !isOpen;
-    
+
     if (isOpen) {
       mobileMenu?.classList.remove('hidden');
       // Animate hamburger to X
