@@ -4,7 +4,7 @@ const navItems = [
   { href: '/', label: 'Início' },
   { href: '/#areas', label: 'Áreas de Atuação' },
   { href: '/#sobre', label: 'Sobre' },
-  // { href: '/blog', label: 'Blog' },
+  { href: '/blog', label: 'Blog' },
   { href: '/#contato', label: 'Contato' },
 ];
 
@@ -20,7 +20,7 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
     id="brand-logo"
     href="/"
     aria-label="Santos & Trevizan — página inicial"
-    class="transition-opacity duration-300"
+    class="transition-opacity duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] rounded"
   >
     <img
       src="/brand-nav.webp"
@@ -36,7 +36,7 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
       {navItems.map((item) => (
         <a
           href={item.href}
-          class="px-4 py-2 text-base font-medium rounded-lg transition-all duration-200 hover:bg-[#1D2A3D]/10"
+          class="px-4 py-2 text-base font-medium rounded-lg transition-all duration-200 hover:bg-[#1D2A3D]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A]"
           style="color: #1D2A3D;"
         >
           {item.label}
@@ -48,8 +48,10 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
   <!-- Mobile: Hamburger button (right side) -->
   <button
     id="menu-toggle"
-    class="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-lg hover:bg-[#1D2A3D]/10 transition-colors"
+    class="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-lg hover:bg-[#1D2A3D]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A]"
     aria-label="Menu"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
   >
     <span class="hamburger-line w-6 h-0.5 bg-[#1D2A3D] mb-1.5 transition-all duration-300"></span>
     <span class="hamburger-line w-6 h-0.5 bg-[#1D2A3D] mb-1.5 transition-all duration-300"></span>
@@ -60,12 +62,14 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
   <div
     id="mobile-menu"
     class="fixed inset-0 top-16 bg-[#D9D8D3]/98 backdrop-blur-sm z-40 hidden md:hidden"
+    role="dialog"
+    aria-label="Menu de navegação"
   >
     <nav class="flex flex-col items-center justify-center h-full gap-4">
       {navItems.map((item) => (
         <a
           href={item.href}
-          class="mobile-nav-link px-6 py-3 text-2xl font-medium rounded-lg hover:bg-[#1D2A3D]/10 transition-colors"
+          class="mobile-nav-link px-6 py-3 text-2xl font-medium rounded-lg hover:bg-[#1D2A3D]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A]"
           style="color: #1D2A3D;"
         >
           {item.label}
@@ -103,14 +107,21 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
   function toggleMenu() {
     isOpen = !isOpen;
 
+    // Update aria-expanded
+    menuToggle?.setAttribute('aria-expanded', String(isOpen));
+
     if (isOpen) {
       mobileMenu?.classList.remove('hidden');
+      // Lock body scroll
+      document.body.style.overflow = 'hidden';
       // Animate hamburger to X
       hamburgerLines[0]?.classList.add('rotate-45', 'translate-y-2');
       hamburgerLines[1]?.classList.add('opacity-0');
       hamburgerLines[2]?.classList.add('-rotate-45', '-translate-y-2');
     } else {
       mobileMenu?.classList.add('hidden');
+      // Unlock body scroll
+      document.body.style.overflow = '';
       // Reset hamburger
       hamburgerLines[0]?.classList.remove('rotate-45', 'translate-y-2');
       hamburgerLines[1]?.classList.remove('opacity-0');
@@ -125,5 +136,13 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
     link.addEventListener('click', () => {
       if (isOpen) toggleMenu();
     });
+  });
+
+  // Close menu with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) {
+      toggleMenu();
+      menuToggle?.focus();
+    }
   });
 </script>

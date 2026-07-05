@@ -106,15 +106,10 @@ function getAreaData(title: string) {
 				</div>
 
 				<!-- Right: Tagline + CTA (3/5 width) -->
-				<div class="w-full md:flex-[3] flex flex-col items-center md:items-start text-center md:text-left space-y-5">
-
-					<!-- Headline -->
-					<p class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight" style="font-family: 'Lora', serif; color: #1D2A3D;">
-						Seu direito, nossa causa.
-					</p>
+				<div class="w-full md:flex-[3] flex flex-col items-center md:items-end text-center md:text-right space-y-5">
 
 					<!-- Supporting subtitle -->
-					<p class="text-base md:text-lg lg:text-xl leading-relaxed" style="color: #4A5568;">
+					<p class="text-xl md:text-2xl lg:text-3xl leading-snug md:border-r-4 md:border-[#B8924A] md:pr-5" style="font-family: 'Lora', serif; color: #1D2A3D;">
 						Atendimento humanizado e soluções jurídicas eficientes para você e sua família.
 					</p>
 					<div class="w-full pt-2 flex justify-center md:justify-end">
@@ -138,7 +133,7 @@ function getAreaData(title: string) {
 
 	<!-- Áreas de Atuação Section -->
 	<section id="areas" class="py-20 bg-[#1D2A3D]">
-		<div class="max-w-7xl mx-auto px-8">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
 			<h2 class="text-4xl font-bold text-white mb-10">Áreas de Atuação</h2>
 			{areas.length === 0 ? (
 				<p class="text-slate-300">Nenhuma área de atuação cadastrada.</p>
@@ -151,7 +146,7 @@ function getAreaData(title: string) {
 								href={getAreaWhatsAppUrl(area.title)}
 								target="_blank"
 								rel="noopener noreferrer"
-								class={`group relative bg-[#243350] hover:bg-[#293a5a] border border-[#B8924A]/25 hover:border-[#F0D080]/50 rounded-xl p-7 flex flex-col min-h-[460px] cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl no-underline ${idx === 2 ? 'md:col-span-2 md:max-w-md md:mx-auto lg:col-span-1 lg:max-w-none lg:mx-0' : ''}`}
+								class={`group relative bg-[#243350] hover:bg-[#293a5a] border border-[#B8924A]/25 hover:border-[#F0D080]/50 rounded-xl p-5 sm:p-7 flex flex-col min-h-0 md:min-h-[460px] cursor-pointer transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-xl no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] ${idx === 2 ? 'md:col-span-2 md:max-w-md md:mx-auto lg:col-span-1 lg:max-w-none lg:mx-0' : ''}`}
 							>
 								<!-- Golden L-bracket corner accent (overflows top-left) -->
 								<div class="absolute" style="top: -12px; left: -12px; width: 36px; height: 36px; pointer-events: none;">
@@ -199,7 +194,7 @@ function getAreaData(title: string) {
 		<!-- Decorative background shape -->
 		<div class="absolute top-0 right-0 w-96 h-96 bg-[#B8924A]/5 rounded-full blur-3xl pointer-events-none"></div>
 		
-		<div class="max-w-7xl mx-auto px-8 relative">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative">
 			<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 				
 				<!-- Left column: Title & Biography (7/12 cols) -->
@@ -217,11 +212,14 @@ function getAreaData(title: string) {
 						<p>
 							Com sólida experiência jurídica e constante aprimoramento técnico e prático, o escritório pauta seu trabalho na defesa dos direitos individuais e na construção de soluções jurídicas sólidas, tanto na esfera administrativa quanto judicial.
 						</p>
+						<p>
+							Com <strong>alcance nacional</strong>, o escritório oferece atendimento 100% digital — por videochamada, WhatsApp e e-mail — permitindo que clientes de qualquer região do Brasil tenham acesso a uma assessoria jurídica de qualidade, sem a necessidade de deslocamento. Essa estrutura garante agilidade, proximidade e conveniência em todas as etapas do processo.
+						</p>
 					</div>
 				</div>
 
 				<!-- Right column: Pillars / Core Values (5/12 cols) -->
-				<div class="lg:col-span-5 bg-white p-8 rounded-2xl shadow-xl border border-slate-100 space-y-6">
+				<div class="lg:col-span-5 bg-white p-5 md:p-8 rounded-2xl shadow-xl border border-slate-100 space-y-6">
 					<h3 class="text-xl font-bold" style="color: #1D2A3D;">Diretrizes de Atuação</h3>
 					
 					<div class="space-y-4">
@@ -272,8 +270,8 @@ function getAreaData(title: string) {
 	</section>
 
 	<!-- Contato Section -->
-	<section id="contato" class="py-20 bg-slate-900 text-white">
-		<div class="max-w-7xl mx-auto px-8">
+	<footer id="contato" class="py-20 bg-slate-900 text-white" role="contentinfo">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
 			<h2 class="text-4xl font-bold mb-8">Contato</h2>
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
 				<div>
@@ -283,11 +281,11 @@ function getAreaData(title: string) {
 					<div class="space-y-4">
 						<p class="flex items-center gap-3 text-slate-300">
 							<span class="font-medium text-white">Email:</span>
-							<a href="#" id="email-contact" class="hover:text-amber-500 transition-colors no-underline"></a>
+							<a href="#" id="email-contact" class="hover:text-amber-500 transition-colors no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] rounded"></a>
 						</p>
 						<p class="flex items-center gap-3 text-slate-300">
 							<span class="font-medium text-white">Telefone:</span>
-							<a href="#" id="phone-contact" class="hover:text-amber-500 transition-colors no-underline"></a>
+							<a href="#" id="phone-contact" class="hover:text-amber-500 transition-colors no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] rounded"></a>
 						</p>
 						<p class="flex items-center gap-3 text-slate-300">
 							<span class="font-medium text-white">Endereço:</span> São Paulo, SP
@@ -322,5 +320,5 @@ function getAreaData(title: string) {
 				</div>
 			</div>
 		</div>
-	</section>
+	</footer>
 </Layout>
