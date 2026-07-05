@@ -7,16 +7,17 @@ export const blockContent = defineType({
 	of: [
 		defineArrayMember({
 			type: "block",
-			title: "Bloco",
+			title: "Bloco de Texto",
 			styles: [
 				{ title: "Normal", value: "normal" },
-				{ title: "Título 2", value: "h2" },
-				{ title: "Título 3", value: "h3" },
-				{ title: "Título 4", value: "h4" },
+				{ title: "Título Principal", value: "h1" },
+				{ title: "Título de Seção", value: "h2" },
+				{ title: "Subtítulo", value: "h3" },
+				{ title: "Subtítulo Menor", value: "h4" },
 				{ title: "Citação", value: "blockquote" },
 			],
 			lists: [
-				{ title: "Lista", value: "bullet" },
+				{ title: "Lista com Marcadores", value: "bullet" },
 				{ title: "Lista Numerada", value: "number" },
 			],
 			marks: {
@@ -35,6 +36,8 @@ export const blockContent = defineType({
 								name: "href",
 								title: "URL",
 								type: "url",
+								description:
+									"Cole o endereço do link aqui. Ex: https://exemplo.com",
 								validation: (Rule) =>
 									Rule.uri({
 										scheme: [
@@ -53,18 +56,22 @@ export const blockContent = defineType({
 		defineArrayMember({
 			type: "image",
 			title: "Imagem",
+			description: "Adicione uma imagem ao conteúdo do artigo.",
 			options: { hotspot: true },
 			fields: [
 				{
 					name: "alt",
 					title: "Texto Alternativo",
 					type: "string",
-					description: "Importante para acessibilidade e SEO",
+					description:
+						"Descreva a imagem para acessibilidade e SEO.",
 				},
 				{
 					name: "caption",
 					title: "Legenda",
 					type: "string",
+					description:
+						"Legenda exibida abaixo da imagem (opcional).",
 				},
 			],
 		}),

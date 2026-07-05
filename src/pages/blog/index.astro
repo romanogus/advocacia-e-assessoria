@@ -3,7 +3,7 @@ import { sanityClient } from 'sanity:client'
 import Layout from '../../layouts/Layout.astro'
 
 const posts = await sanityClient.fetch(
-  `*[_type == "post"] | order(publishedAt desc) {
+  `*[_type == "post" && status == "publicado"] | order(publishedAt desc) {
     _id,
     title,
     slug,
@@ -18,7 +18,7 @@ const posts = await sanityClient.fetch(
     <h1 class="text-4xl font-bold text-slate-800 mb-8">Blog</h1>
     
     {posts.length === 0 ? (
-      <p class="text-slate-600">No posts yet.</p>
+      <p class="text-slate-600">Nenhum artigo publicado ainda.</p>
     ) : (
       <div class="flex flex-col gap-6">
         {posts.map((post: any) => (

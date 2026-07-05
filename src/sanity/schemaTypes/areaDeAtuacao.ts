@@ -1,34 +1,40 @@
 import { defineField, defineType } from "sanity";
+import { CaseIcon } from "@sanity/icons";
 
 export const areaDeAtuacao = defineType({
 	name: "areaDeAtuacao",
 	title: "Área de Atuação",
 	type: "document",
+	icon: CaseIcon,
 	fields: [
 		defineField({
 			name: "title",
-			title: "Título",
+			title: "Nome da Área",
 			type: "string",
-			validation: (Rule) => Rule.required(),
+			description: "O nome da área de atuação. Ex: Direito Trabalhista.",
+			placeholder: "Ex: Direito Civil",
+			validation: (Rule) => Rule.required().error("O nome da área é obrigatório."),
 		}),
 		defineField({
 			name: "description",
 			title: "Descrição",
 			type: "text",
 			rows: 3,
-			validation: (Rule) => Rule.required(),
+			description: "Uma breve descrição dos serviços prestados nesta área.",
+			placeholder: "Ex: Assessoria jurídica em contratos, família e sucessões.",
+			validation: (Rule) => Rule.required().error("A descrição é obrigatória."),
 		}),
 		defineField({
 			name: "icon",
 			title: "Ícone",
 			type: "string",
-			description: "Nome do ícone (opcional, para uso futuro)",
+			description: "Nome do ícone (opcional, para uso futuro).",
 		}),
 		defineField({
 			name: "order",
-			title: "Ordem",
+			title: "Ordem de Exibição",
 			type: "number",
-			description: "Ordem de exibição (menor número aparece primeiro)",
+			description: "Menor número aparece primeiro no site. Ex: 1 = primeira posição.",
 			initialValue: 0,
 		}),
 	],
