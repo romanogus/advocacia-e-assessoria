@@ -84,23 +84,6 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
   const mobileMenu = document.getElementById('mobile-menu');
   const hamburgerLines = document.querySelectorAll('.hamburger-line');
   const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-  const brandLogo = document.getElementById('brand-logo');
-  const heroSection = document.getElementById('hero');
-
-  // Hide logo while the hero section is visible; show it once scrolled past
-  if (heroSection && brandLogo) {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          brandLogo.classList.add('opacity-0', 'pointer-events-none');
-        } else {
-          brandLogo.classList.remove('opacity-0', 'pointer-events-none');
-        }
-      },
-      { threshold: 0 }
-    );
-    observer.observe(heroSection);
-  }
 
   let isOpen = false;
 

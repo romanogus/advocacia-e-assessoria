@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-11T23:21:20.176Z",
+  "title": "Design System: Santos & Trevizan — Advocacia e Assessoria",
+  "extensions": {
+    "colorMeta": {
+      "chamber-navy": {
+        "role": "primary",
+        "displayName": "Chamber Navy",
+        "canonical": "#1D2A3D",
+        "tonalRamp": [
+          "#0E151F",
+          "#1D2A3D",
+          "#243350",
+          "#293A5A",
+          "#3B4E73"
+        ]
+      },
+      "old-gold": {
+        "role": "secondary",
+        "displayName": "Old Gold",
+        "canonical": "#B8924A",
+        "tonalRamp": [
+          "#7D612D",
+          "#9E7B3A",
+          "#B8924A",
+          "#D4A857",
+          "#F0D080"
+        ]
+      },
+      "warm-parchment": {
+        "role": "neutral",
+        "displayName": "Warm Parchment",
+        "canonical": "#D9D8D3",
+        "tonalRamp": [
+          "#B5B3AA",
+          "#C7C5BE",
+          "#D9D8D3",
+          "#ECEBE8",
+          "#F7F7F5"
+        ]
+      },
+      "action-green": {
+        "role": "tertiary",
+        "displayName": "Direct Action Green",
+        "canonical": "#25D366",
+        "tonalRamp": [
+          "#1B9949",
+          "#20BA56",
+          "#25D366",
+          "#45DC7C",
+          "#7CE8A4"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display Headline",
+        "purpose": "Hero statement and primary page declarations."
+      },
+      "headline": {
+        "displayName": "Section Headline",
+        "purpose": "Major section headers and structural anchors."
+      },
+      "title": {
+        "displayName": "Card & Category Title",
+        "purpose": "Practice areas and value pillar titles."
+      },
+      "body": {
+        "displayName": "Body Text",
+        "purpose": "General editorial copy, descriptions, and legal summaries."
+      },
+      "label": {
+        "displayName": "Label & Kickers",
+        "purpose": "Micro-copy, badges, and uppercase categorizations."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-rest",
+        "value": "0 1px 3px 0 rgb(0 0 0 / 0.1)",
+        "purpose": "Subtle foundation for light containers."
+      },
+      {
+        "name": "card-lift",
+        "value": "0 20px 25px -5px rgb(0 0 0 / 0.2)",
+        "purpose": "Hover response for interactive practice cards."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Standard transition easing for UI interactions."
+      },
+      {
+        "name": "duration-fast",
+        "value": "200ms",
+        "purpose": "Navigation and button state shifts."
+      },
+      {
+        "name": "duration-normal",
+        "value": "300ms",
+        "purpose": "Card scaling and modal drawer animation."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "WhatsApp Consultation Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary conversion CTA connecting visitors directly with an attorney.",
+      "html": "<a href=\"#\" class=\"ds-btn-whatsapp\"><span>Falar com um advogado</span></a>",
+      "css": ".ds-btn-whatsapp { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 16px 32px; background: #25D366; color: #ffffff; font-family: 'Lato', sans-serif; font-size: 1.125rem; font-weight: 600; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-decoration: none; } .ds-btn-whatsapp:hover { background: #20BA56; transform: scale(1.02); }"
+    },
+    {
+      "name": "Practice Area Card",
+      "kind": "card",
+      "refersTo": "card-area",
+      "description": "Interactive card showcasing legal specialization with custom icon, topics, and direct inquiry link.",
+      "html": "<div class=\"ds-card-area\"><h3>Direito Trabalhista</h3><p>Orientação informativa sobre demissões, verbas e direitos.</p></div>",
+      "css": ".ds-card-area { background: #243350; border: 1px solid rgba(184, 146, 74, 0.25); border-radius: 12px; padding: 28px; color: #ffffff; transition: all 0.3s ease; } .ds-card-area:hover { background: #293A5A; border-color: rgba(240, 208, 128, 0.5); transform: scale(1.02); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Dignified Advocate",
+    "overview": "The Santos & Trevizan visual system balances the gravitas and rigor of Brazilian jurisprudence with warm, empathetic modern clarity. Visual weight rests on Chamber Navy (#1D2A3D) anchored by Warm Parchment (#D9D8D3) surfaces and Old Gold (#B8924A) accents.",
+    "keyCharacteristics": [
+      "Prestige without Pretense (navy and gold framed by warm parchment)",
+      "Immediate Human Accessibility (frictionless WhatsApp pathways)",
+      "Rigor & Structure (clean modular editorial hierarchy)"
+    ],
+    "rules": [
+      {
+        "name": "The Action Exclusivity Rule",
+        "body": "Action Green (#25D366) is exclusively reserved for direct client communication channels (WhatsApp triage, consultation booking).",
+        "section": "colors"
+      },
+      {
+        "name": "The Golden Precision Rule",
+        "body": "Old Gold is an accent, not a fill. It appears in delicate structural strokes, icon lines, and refined borders; it never dominates large background planes.",
+        "section": "colors"
+      },
+      {
+        "name": "The Plain Language Rule",
+        "body": "Body text must remain generous in line-height (1.6+) and never drop below 15px.",
+        "section": "typography"
+      },
+      {
+        "name": "The Grounded Surface Rule",
+        "body": "Deep navy surfaces use tone shifts (#1D2A3D to #243350) rather than dark drop shadows to create spatial layering.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do maintain strong contrast ratios across all text.",
+      "Do preserve structured WhatsApp triage messages per practice area.",
+      "Do maintain generous whitespace and line-height on legal explanations.",
+      "Do keep touch targets on mobile at least 48x48px."
+    ],
+    "donts": [
+      "Don't use legal stock clichés (wooden gavels, blindfolded lady justice, marble columns).",
+      "Don't apply AI side-tab borders (thick unilateral colored borders).",
+      "Don't use Action Green for anything other than direct communication.",
+      "Don't use high-pressure sales urgency patterns or popups."
+    ]
+  }
+}

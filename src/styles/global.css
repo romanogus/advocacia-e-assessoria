@@ -2,8 +2,8 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-family-sans: 'Lato', sans-serif;
-  --font-family-serif: 'Merriweather', Georgia, serif;
+  --font-family-sans: 'Albert Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-serif: 'Lora', Georgia, serif;
 }
 
 html {
@@ -11,8 +11,14 @@ html {
   scrollbar-gutter: stable;
 }
 
+::selection {
+  background-color: #B8924A;
+  color: #FFFFFF;
+}
+
 body {
   font-family: var(--font-family-sans);
+  color: #1E293B;
 }
 
 h1, h2, h3, h4, h5, h6 {
