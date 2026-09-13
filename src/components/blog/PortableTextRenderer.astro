@@ -19,7 +19,7 @@ const components = {
 };
 ---
 
-<div class="article-content max-w-none text-[#1E293B] text-lg leading-[1.85]">
+<div class="article-content max-w-[68ch] mx-auto text-[#1E293B] text-lg leading-[1.85]">
   <PortableText value={value} components={components} />
 </div>
 
@@ -34,7 +34,8 @@ const components = {
     color: #1E293B;
     font-weight: 450;
   }
-  .article-content h2 {
+  .article-content > h2,
+  .article-content h2:not([class*="text-white"]) {
     font-family: var(--font-family-serif, 'Lora', Georgia, serif);
     font-size: 2.25rem;
     font-weight: 700;
@@ -44,10 +45,11 @@ const components = {
     line-height: 1.25;
     scroll-margin-top: 5rem;
   }
-  .article-content h3 {
+  .article-content > h3,
+  .article-content h3:not([class*="text-white"]) {
     font-family: var(--font-family-serif, 'Lora', Georgia, serif);
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 700;
     color: #1D2A3D;
     margin-top: 2rem;
     margin-bottom: 0.75rem;

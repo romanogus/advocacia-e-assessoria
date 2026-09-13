@@ -102,9 +102,9 @@ const categoryList = categories && categories.length > 0
       {featuredPost && (
         <div class="mb-14 post-card-wrapper" data-post-categories={featuredPost.categories?.map((c: any) => c.title?.toLowerCase()).join(' ')}>
           <div class="flex items-center gap-2 mb-4">
-            <span class="text-xs font-bold tracking-wider uppercase text-[#B8924A]">
+            <h2 class="text-xs font-bold tracking-wider uppercase text-[#7D5F23]">
               Publicação em Destaque
-            </span>
+            </h2>
             <div class="flex-1 h-px bg-[#B8924A]/20"></div>
           </div>
           <BlogCard post={featuredPost} featuredLayout={true} />
@@ -113,11 +113,11 @@ const categoryList = categories && categories.length > 0
 
       {/* Grid of Remaining Posts */}
       {remainingPosts.length > 0 && (
-        <div>
+        <div id="recent-posts-container">
           <div class="flex items-center gap-2 mb-6">
-            <span class="text-xs font-bold tracking-wider uppercase text-slate-500">
+            <h2 class="text-xs font-bold tracking-wider uppercase text-[#1D2A3D]">
               Artigos Recentes
-            </span>
+            </h2>
             <div class="flex-1 h-px bg-slate-200"></div>
           </div>
           
@@ -130,6 +130,26 @@ const categoryList = categories && categories.length > 0
           </div>
         </div>
       )}
+
+      <!-- Empty state when category filter returns 0 articles -->
+      <div id="filter-empty-state" class="hidden py-12 text-center" role="status" aria-live="polite">
+        <div class="max-w-md mx-auto p-8 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+          <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-[#1D2A3D]/5 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#7D5F23]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-serif font-bold text-[#1D2A3D] mb-2">Nenhum artigo encontrado nesta categoria</h3>
+          <p class="text-slate-600 text-sm mb-6 leading-relaxed">Nossa equipe jurídica está preparando novos artigos para esta área. Você pode tirar dúvidas diretamente com nossos advogados pelo WhatsApp.</p>
+          <button
+            type="button"
+            id="reset-filter-btn"
+            class="px-5 py-2.5 rounded-lg bg-[#1D2A3D] text-white text-sm font-medium hover:bg-[#243350] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A]"
+          >
+            Ver todas as categorias
+          </button>
+        </div>
+      </div>
 
       <!-- Bottom Lead Gen CTA -->
       <div class="mt-16">
@@ -144,31 +164,57 @@ const categoryList = categories && categories.length > 0
 </Layout>
 
 <script>
-  // Simple client-side category filter
+  // Client-side category filter with zero-state and aria-pressed support
   const filterBtns = document.querySelectorAll('.category-filter-btn');
   const postCards = document.querySelectorAll('.post-card-wrapper');
+  const emptyState = document.getElementById('filter-empty-state');
+  const resetBtn = document.getElementById('reset-filter-btn');
+
+  function filterPosts(selected: string) {
+    let visibleCount = 0;
+
+    // Update button styles and aria-pressed
+    filterBtns.forEach((b) => {
+      const isCurrent = (b.getAttribute('data-category') || 'all') === selected;
+      b.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
+      if (isCurrent) {
+        b.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+        b.classList.add('bg-[#1D2A3D]', 'text-white');
+      } else {
+        b.classList.remove('bg-[#1D2A3D]', 'text-white');
+        b.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+      }
+    });
+
+    // Filter cards
+    postCards.forEach((card) => {
+      const cardCategories = card.getAttribute('data-post-categories') || '';
+      if (selected === 'all' || cardCategories.includes(selected)) {
+        (card as HTMLElement).style.display = '';
+        visibleCount++;
+      } else {
+        (card as HTMLElement).style.display = 'none';
+      }
+    });
+
+    // Show/hide empty state
+    if (emptyState) {
+      if (visibleCount === 0) {
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+      }
+    }
+  }
 
   filterBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       const selected = btn.getAttribute('data-category') || 'all';
-
-      // Update button styles
-      filterBtns.forEach((b) => {
-        b.classList.remove('bg-[#1D2A3D]', 'text-white');
-        b.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-200');
-      });
-      btn.classList.add('bg-[#1D2A3D]', 'text-white');
-      btn.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-200');
-
-      // Filter cards
-      postCards.forEach((card) => {
-        const cardCategories = card.getAttribute('data-post-categories') || '';
-        if (selected === 'all' || cardCategories.includes(selected)) {
-          (card as HTMLElement).style.display = '';
-        } else {
-          (card as HTMLElement).style.display = 'none';
-        }
-      });
+      filterPosts(selected);
     });
+  });
+
+  resetBtn?.addEventListener('click', () => {
+    filterPosts('all');
   });
 </script>
