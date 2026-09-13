@@ -11,6 +11,7 @@ export interface BlogPost {
     role?: string;
     image?: any;
     bio?: string;
+    oab?: string;
   };
   categories?: Array<{
     title: string;
@@ -30,6 +31,7 @@ export const exemplarPost: BlogPost = {
     name: 'Dra. Paloma André dos Santos',
     role: 'Advogada — Especialista em Direito Previdenciário e Trabalhista',
     bio: 'Advogada fundadora de Santos & Trevizan, com atuação humanizada e especializada na defesa de segurados da Previdência Social e trabalhadores em todo o território nacional.',
+    oab: 'Inscrição OAB/SP',
   },
   categories: [
     { title: 'Previdenciário', slug: { current: 'previdenciario' } },

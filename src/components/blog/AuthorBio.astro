@@ -6,6 +6,7 @@ interface Props {
   role?: string;
   bio?: string;
   image?: any;
+  oab?: string;
 }
 
 const {
@@ -13,6 +14,7 @@ const {
   role = "Advogada — Especialista em Direito Previdenciário e Trabalhista",
   bio = "Advogada fundadora de Santos & Trevizan, com foco em atendimento humanizado e resolução estratégica de conflitos trabalhistas e previdenciários. Atuação consultiva e contenciosa com alcance em todo o Brasil.",
   image,
+  oab = "Inscrição OAB/SP",
 } = Astro.props;
 
 const imageUrl = image ? urlForImage(image)?.width(240).height(240).url() : null;
@@ -46,7 +48,7 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(`O
         {name}
       </h3>
       <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#B8924A]/15 text-[#7D5F23] border border-[#B8924A]/30">
-        OAB/SP
+        {oab}
       </span>
     </div>
     
