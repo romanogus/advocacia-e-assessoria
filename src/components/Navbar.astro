@@ -20,11 +20,13 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
     id="brand-logo"
     href="/"
     aria-label="Santos & Trevizan — página inicial"
-    class="transition-opacity duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] rounded"
+    class="transition-opacity duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1D2A3D] rounded"
   >
     <img
       src="/brand-nav.webp"
       alt="Santos & Trevizan"
+      width="509"
+      height="142"
       class="h-10 md:h-10 w-auto object-contain"
       loading="eager"
     />
@@ -36,7 +38,7 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
       {navItems.map((item) => (
         <a
           href={item.href}
-          class="px-4 py-2 text-base font-medium rounded-lg transition-all duration-200 hover:bg-[#1D2A3D]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A]"
+          class="px-4 py-2 text-base font-medium rounded-lg transition-all duration-200 hover:bg-[#1D2A3D]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1D2A3D]"
           style="color: #1D2A3D;"
         >
           {item.label}
@@ -48,7 +50,7 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
   <!-- Mobile: Hamburger button (right side) -->
   <button
     id="menu-toggle"
-    class="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-lg hover:bg-[#1D2A3D]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A]"
+    class="md:hidden flex flex-col justify-center items-center w-11 h-11 rounded-lg hover:bg-[#1D2A3D]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1D2A3D]"
     aria-label="Menu"
     aria-expanded="false"
     aria-controls="mobile-menu"
@@ -69,7 +71,7 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
       {navItems.map((item) => (
         <a
           href={item.href}
-          class="mobile-nav-link px-6 py-3 text-2xl font-medium rounded-lg hover:bg-[#1D2A3D]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A]"
+          class="mobile-nav-link px-6 py-3 text-2xl font-medium rounded-lg hover:bg-[#1D2A3D]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1D2A3D]"
           style="color: #1D2A3D;"
         >
           {item.label}
@@ -84,6 +86,8 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
   const mobileMenu = document.getElementById('mobile-menu');
   const hamburgerLines = document.querySelectorAll('.hamburger-line');
   const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+  const mainEl = document.querySelector('main');
+  const footerEl = document.querySelector('footer');
 
   let isOpen = false;
 
@@ -95,16 +99,20 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
 
     if (isOpen) {
       mobileMenu?.classList.remove('hidden');
-      // Lock body scroll
+      // Lock body scroll and trap focus
       document.body.style.overflow = 'hidden';
+      mainEl?.setAttribute('inert', '');
+      footerEl?.setAttribute('inert', '');
       // Animate hamburger to X
       hamburgerLines[0]?.classList.add('rotate-45', 'translate-y-2');
       hamburgerLines[1]?.classList.add('opacity-0');
       hamburgerLines[2]?.classList.add('-rotate-45', '-translate-y-2');
     } else {
       mobileMenu?.classList.add('hidden');
-      // Unlock body scroll
+      // Unlock body scroll and release focus
       document.body.style.overflow = '';
+      mainEl?.removeAttribute('inert');
+      footerEl?.removeAttribute('inert');
       // Reset hamburger
       hamburgerLines[0]?.classList.remove('rotate-45', 'translate-y-2');
       hamburgerLines[1]?.classList.remove('opacity-0');
