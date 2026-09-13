@@ -1,0 +1,69 @@
+---
+interface Props {
+  node: {
+    _type: string;
+    type?: 'tip' | 'warning' | 'legal' | 'info';
+    title?: string;
+    text: string;
+  };
+}
+
+const { node } = Astro.props;
+
+const calloutType = node.type || 'tip';
+
+const config = {
+  tip: {
+    icon: '💡',
+    defaultTitle: 'Dica Jurídica',
+    containerClass: 'bg-amber-50/60 border-amber-200 text-[#1E293B]',
+    iconBg: 'bg-amber-100 text-amber-800 border-amber-200',
+    titleColor: 'text-[#1D2A3D]',
+  },
+  warning: {
+    icon: '⚠️',
+    defaultTitle: 'Atenção aos Prazos',
+    containerClass: 'bg-rose-50/60 border-rose-200 text-[#1E293B]',
+    iconBg: 'bg-rose-100 text-rose-800 border-rose-200',
+    titleColor: 'text-rose-900',
+  },
+  legal: {
+    icon: '⚖️',
+    defaultTitle: 'O Que Diz a Lei',
+    containerClass: 'bg-slate-50 border-[#B8924A]/30 text-[#1D2A3D]',
+    iconBg: 'bg-[#1D2A3D] text-[#F0D080] border-[#B8924A]/40',
+    titleColor: 'text-[#1D2A3D]',
+  },
+  info: {
+    icon: 'ℹ️',
+    defaultTitle: 'Informação Importante',
+    containerClass: 'bg-blue-50/60 border-blue-200 text-[#1E293B]',
+    iconBg: 'bg-blue-100 text-blue-800 border-blue-200',
+    titleColor: 'text-blue-900',
+  },
+}[calloutType] || {
+  icon: '💡',
+  defaultTitle: 'Destaque',
+  containerClass: 'bg-amber-50/60 border-amber-200 text-[#1E293B]',
+  iconBg: 'bg-amber-100 text-amber-800 border-amber-200',
+  titleColor: 'text-[#1D2A3D]',
+};
+
+const displayTitle = node.title || config.defaultTitle;
+---
+
+<aside class={`my-8 p-5 sm:p-6 rounded-xl border shadow-xs ${config.containerClass}`} role="note">
+  <div class="flex items-start gap-3 sm:gap-4">
+    <div class={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 text-base font-bold border shadow-xs ${config.iconBg}`}>
+      <span>{config.icon}</span>
+    </div>
+    <div class="flex-1">
+      <h4 class={`text-base font-bold font-serif mb-1.5 ${config.titleColor}`}>
+        {displayTitle}
+      </h4>
+      <p class="text-sm sm:text-base leading-relaxed whitespace-pre-line text-slate-700">
+        {node.text}
+      </p>
+    </div>
+  </div>
+</aside>

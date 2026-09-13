@@ -1,0 +1,155 @@
+---
+import { urlForImage } from '../../lib/sanity.image';
+
+interface Props {
+  post: {
+    _id?: string;
+    title: string;
+    slug: { current: string } | string;
+    excerpt?: string;
+    publishedAt?: string;
+    mainImage?: any;
+    featured?: boolean;
+    author?: {
+      name: string;
+      role?: string;
+      image?: any;
+    };
+    categories?: Array<{
+      title: string;
+      slug?: { current: string } | string;
+    }>;
+  };
+  featuredLayout?: boolean;
+}
+
+const { post, featuredLayout = false } = Astro.props;
+
+const slugStr = typeof post.slug === 'string' ? post.slug : post.slug?.current || '';
+const href = `/blog/${slugStr}`;
+
+const coverUrl = post.mainImage 
+  ? urlForImage(post.mainImage)?.width(featuredLayout ? 1200 : 700).height(featuredLayout ? 675 : 394).url() 
+  : null;
+
+const authorImageUrl = post.author?.image 
+  ? urlForImage(post.author.image)?.width(80).height(80).url() 
+  : null;
+
+const authorName = post.author?.name || "Dra. Paloma André dos Santos";
+
+const formattedDate = post.publishedAt
+  ? new Date(post.publishedAt).toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    })
+  : null;
+
+const primaryCategory = post.categories?.[0]?.title || "Direito Previdenciário";
+
+// Calculate approximate reading time (approx 200 words per minute)
+const textForEstimate = `${post.title} ${post.excerpt || ''}`;
+const wordCount = textForEstimate.split(/\s+/).length;
+const readingTimeMinutes = Math.max(3, Math.ceil(wordCount / 50));
+---
+
+<article class={`group relative flex flex-col bg-white rounded-2xl border border-slate-200/80 hover:border-[#B8924A]/50 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden ${featuredLayout ? 'md:grid md:grid-cols-12 md:gap-8' : ''}`}>
+  
+  <!-- Image Container -->
+  <div class={`relative overflow-hidden bg-[#1D2A3D] ${featuredLayout ? 'md:col-span-7 aspect-[16/9] md:aspect-auto' : 'aspect-[16/9]'}`}>
+    {coverUrl ? (
+      <img
+        src={coverUrl}
+        alt={post.mainImage?.alt || post.title}
+        width={featuredLayout ? 1200 : 700}
+        height={featuredLayout ? 675 : 394}
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+      />
+    ) : (
+      <!-- Dignified Brand Fallback Pattern -->
+      <div class="w-full h-full min-h-[220px] bg-gradient-to-br from-[#1D2A3D] via-[#243350] to-[#121B27] flex flex-col items-center justify-center p-6 text-center">
+        <div class="w-14 h-14 rounded-full bg-[#B8924A]/20 border border-[#B8924A]/40 flex items-center justify-center text-[#F0D080] font-serif text-xl font-bold mb-3">
+          ST
+        </div>
+        <span class="text-xs uppercase tracking-widest text-[#B8924A] font-medium">
+          Santos & Trevizan
+        </span>
+      </div>
+    )}
+
+    <!-- Category Pill on Top of Image -->
+    <div class="absolute top-4 left-4 z-10">
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#1D2A3D]/80 backdrop-blur-md text-[#F0D080] border border-[#B8924A]/40 shadow-sm">
+        {primaryCategory}
+      </span>
+    </div>
+
+    {post.featured && (
+      <div class="absolute top-4 right-4 z-10">
+        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-[#B8924A] text-white shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+          Destaque
+        </span>
+      </div>
+    )}
+  </div>
+
+  <!-- Content Container -->
+  <div class={`p-6 sm:p-7 flex flex-col justify-between flex-1 ${featuredLayout ? 'md:col-span-5 md:py-8 md:pr-8' : ''}`}>
+    <div>
+      <!-- Meta info: Date & Reading time -->
+      <div class="flex items-center gap-2 text-xs text-slate-500 mb-3">
+        {formattedDate && <time>{formattedDate}</time>}
+        <span>•</span>
+        <span>{readingTimeMinutes} min de leitura</span>
+      </div>
+
+      <!-- Title -->
+      <h3 class={`font-serif font-bold text-[#1D2A3D] group-hover:text-[#B8924A] transition-colors leading-snug mb-3 ${featuredLayout ? 'text-2xl sm:text-3xl' : 'text-xl sm:text-2xl'}`}>
+        <a href={href} class="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] rounded">
+          <span class="absolute inset-0 z-0"></span>
+          {post.title}
+        </a>
+      </h3>
+
+      <!-- Excerpt -->
+      {post.excerpt && (
+        <p class={`text-slate-600 text-sm sm:text-base leading-relaxed line-clamp-3 mb-6 ${featuredLayout ? 'line-clamp-4 text-base' : ''}`}>
+          {post.excerpt}
+        </p>
+      )}
+    </div>
+
+    <!-- Author & Read more footer -->
+    <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
+      <div class="flex items-center gap-2.5">
+        {authorImageUrl ? (
+          <img
+            src={authorImageUrl}
+            alt={authorName}
+            width="28"
+            height="28"
+            class="w-7 h-7 rounded-full object-cover border border-[#B8924A]/40"
+            loading="lazy"
+          />
+        ) : (
+          <div class="w-7 h-7 rounded-full bg-[#1D2A3D] text-[#F0D080] font-serif text-xs font-bold flex items-center justify-center">
+            {authorName.charAt(0)}
+          </div>
+        )}
+        <span class="font-medium text-slate-700">{authorName}</span>
+      </div>
+
+      <span class="inline-flex items-center gap-1 font-semibold text-[#B8924A] group-hover:translate-x-0.5 transition-transform">
+        Ler artigo
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </span>
+    </div>
+  </div>
+</article>

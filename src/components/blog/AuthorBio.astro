@@ -1,0 +1,73 @@
+---
+import { urlForImage } from '../../lib/sanity.image';
+
+interface Props {
+  name?: string;
+  role?: string;
+  bio?: string;
+  image?: any;
+}
+
+const {
+  name = "Dra. Paloma André dos Santos",
+  role = "Advogada — Especialista em Direito Previdenciário e Trabalhista",
+  bio = "Advogada fundadora de Santos & Trevizan, com foco em atendimento humanizado e resolução estratégica de conflitos trabalhistas e previdenciários. Atuação consultiva e contenciosa com alcance em todo o Brasil.",
+  image,
+} = Astro.props;
+
+const imageUrl = image ? urlForImage(image)?.width(240).height(240).url() : null;
+const whatsappPhone = "5511955304453";
+const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(`Olá, ${name}! Li seu artigo e gostaria de tirar uma dúvida jurídica.`)}`;
+---
+
+<div class="my-12 p-6 sm:p-8 rounded-2xl bg-white border border-[#1D2A3D]/10 shadow-sm flex flex-col sm:flex-row items-start sm:items-center gap-6">
+  <!-- Author Avatar -->
+  <div class="shrink-0">
+    {imageUrl ? (
+      <img
+        src={imageUrl}
+        alt={name}
+        width="96"
+        height="96"
+        class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-2 border-[#B8924A]/40 shadow-inner"
+        loading="lazy"
+      />
+    ) : (
+      <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#1D2A3D] text-[#F0D080] font-serif text-2xl font-bold flex items-center justify-center border-2 border-[#B8924A]/40 shadow-inner">
+        PS
+      </div>
+    )}
+  </div>
+
+  <!-- Author Details -->
+  <div class="flex-1">
+    <div class="flex flex-wrap items-center gap-3 mb-1">
+      <h4 class="text-xl font-serif font-bold text-[#1D2A3D]">
+        {name}
+      </h4>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#B8924A]/15 text-[#B8924A] border border-[#B8924A]/30">
+        OAB/SP
+      </span>
+    </div>
+    
+    <p class="text-sm font-medium text-[#B8924A] mb-3">
+      {role}
+    </p>
+
+    <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-4">
+      {bio}
+    </p>
+
+    <a
+      href={whatsappUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-2 text-sm font-semibold text-[#1D2A3D] hover:text-[#B8924A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] rounded"
+    >
+      <span>Conversar diretamente com a advogada</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </a>
+  </div>
+</div>

@@ -1,47 +1,174 @@
 ---
-export const prerender = true;
+export const prerender = false;
 
-import { sanityClient } from 'sanity:client'
-import Layout from '../../layouts/Layout.astro'
+import { sanityClient } from 'sanity:client';
+import Layout from '../../layouts/Layout.astro';
+import BlogCard from '../../components/blog/BlogCard.astro';
+import ArticleCTA from '../../components/blog/ArticleCTA.astro';
+import { exemplarPost } from '../../lib/exemplarPost';
 
-const posts = await sanityClient.fetch(
+// Fetch published posts from Sanity with expanded author and category references
+const sanityPosts = await sanityClient.fetch(
   `*[_type == "post" && status == "publicado"] | order(publishedAt desc) {
     _id,
     title,
     slug,
     excerpt,
-    publishedAt
+    publishedAt,
+    featured,
+    mainImage,
+    author->{ name, role, image },
+    categories[]->{ title, slug }
   }`
-)
+);
+
+// Fetch categories for filtering
+const categories = await sanityClient.fetch(
+  `*[_type == "category"] | order(title asc) {
+    _id,
+    title,
+    slug
+  }`
+);
+
+// If no posts are published in Sanity yet, gracefully show the exemplar post
+const allPosts = sanityPosts && sanityPosts.length > 0 ? sanityPosts : [exemplarPost];
+
+// Identify featured post
+const featuredPost = allPosts.find((p: any) => p.featured) || allPosts[0];
+const remainingPosts = allPosts.filter((p: any) => p._id !== featuredPost?._id);
+
+const categoryList = categories && categories.length > 0
+  ? categories
+  : [
+      { _id: 'cat-prev', title: 'Previdenciário', slug: { current: 'previdenciario' } },
+      { _id: 'cat-trab', title: 'Direito Trabalhista', slug: { current: 'trabalhista' } },
+      { _id: 'cat-civ', title: 'Direito Civil', slug: { current: 'civil' } },
+    ];
 ---
 
-<Layout>
-  <div class="max-w-4xl mx-auto px-6 py-12">
-    <h1 class="text-4xl font-bold text-slate-800 mb-8">Blog</h1>
-    
-    {posts.length === 0 ? (
-      <p class="text-slate-600">Nenhum artigo publicado ainda.</p>
-    ) : (
-      <div class="flex flex-col gap-6">
-        {posts.map((post: any) => (
-          <a 
-            href={`/blog/${post.slug.current}`} 
-            class="block p-6 bg-white rounded-xl shadow-sm border border-slate-100 hover:shadow-md hover:border-slate-200 transition-all duration-200"
+<Layout
+  title="Blog & Coluna Jurídica — Santos & Trevizan Advocacia"
+  description="Artigos, análises e orientações sobre Direito Trabalhista, Previdenciário (INSS e BPC/LOAS) e Direito Civil. Informação jurídica acessível e fundamentada."
+>
+  <!-- Hero Section -->
+  <header class="relative bg-gradient-to-b from-[#D9D8D3]/40 via-[#F9F9F8] to-[#F9F9F8] pt-12 pb-14 sm:pt-16 sm:pb-20 border-b border-slate-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1D2A3D]/5 border border-[#1D2A3D]/10 text-[#1D2A3D] text-xs font-semibold uppercase tracking-wider mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#B8924A]"></span>
+          Coluna Jurídica & Notícias
+        </div>
+        
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-serif text-[#1D2A3D] tracking-tight leading-tight mb-4">
+          Orientações Claras Para Defender Seus Direitos
+        </h1>
+        
+        <p class="text-slate-600 text-lg sm:text-xl leading-relaxed font-normal">
+          Análises fundamentadas e notícias atualizadas sobre Direito Trabalhista, Previdenciário e Civil, produzidas pela equipe de Santos & Trevizan.
+        </p>
+      </div>
+
+      <!-- Categories Filter Bar -->
+      <div class="mt-10 flex flex-wrap items-center gap-2.5 pt-6 border-t border-slate-200/80">
+        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 mr-2">
+          Categorias:
+        </span>
+        <button
+          type="button"
+          class="category-filter-btn px-4 py-1.5 rounded-full text-sm font-medium transition-all bg-[#1D2A3D] text-white shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A]"
+          data-category="all"
+        >
+          Todas
+        </button>
+        {categoryList.map((cat: any) => (
+          <button
+            type="button"
+            class="category-filter-btn px-4 py-1.5 rounded-full text-sm font-medium transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A]"
+            data-category={cat.title?.toLowerCase()}
           >
-            <h2 class="text-2xl font-semibold text-slate-800 mb-2">{post.title}</h2>
-            
-            {post.excerpt && (
-              <p class="text-slate-600 mb-3">{post.excerpt}</p>
-            )}
-            
-            {post.publishedAt && (
-              <time class="text-sm text-slate-400">
-                {new Date(post.publishedAt).toLocaleDateString('pt-BR')}
-              </time>
-            )}
-          </a>
+            {cat.title}
+          </button>
         ))}
       </div>
-    )}
-  </div>
+    </div>
+  </header>
+
+  <!-- Posts Container -->
+  <section class="py-12 sm:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+      
+      {/* Featured Post */}
+      {featuredPost && (
+        <div class="mb-14 post-card-wrapper" data-post-categories={featuredPost.categories?.map((c: any) => c.title?.toLowerCase()).join(' ')}>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-xs font-bold tracking-wider uppercase text-[#B8924A]">
+              Publicação em Destaque
+            </span>
+            <div class="flex-1 h-px bg-[#B8924A]/20"></div>
+          </div>
+          <BlogCard post={featuredPost} featuredLayout={true} />
+        </div>
+      )}
+
+      {/* Grid of Remaining Posts */}
+      {remainingPosts.length > 0 && (
+        <div>
+          <div class="flex items-center gap-2 mb-6">
+            <span class="text-xs font-bold tracking-wider uppercase text-slate-500">
+              Artigos Recentes
+            </span>
+            <div class="flex-1 h-px bg-slate-200"></div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {remainingPosts.map((post: any) => (
+              <div class="post-card-wrapper" data-post-categories={post.categories?.map((c: any) => c.title?.toLowerCase()).join(' ')}>
+                <BlogCard post={post} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Bottom Lead Gen CTA -->
+      <div class="mt-16">
+        <ArticleCTA
+          title="Dúvidas sobre o seu caso específico?"
+          description="Nossos advogados realizam atendimento individualizado com alcance nacional. Entre em contato pelo WhatsApp e envie sua dúvida diretamente à nossa equipe."
+          buttonText="Agendar Consulta pelo WhatsApp"
+        />
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<script>
+  // Simple client-side category filter
+  const filterBtns = document.querySelectorAll('.category-filter-btn');
+  const postCards = document.querySelectorAll('.post-card-wrapper');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const selected = btn.getAttribute('data-category') || 'all';
+
+      // Update button styles
+      filterBtns.forEach((b) => {
+        b.classList.remove('bg-[#1D2A3D]', 'text-white');
+        b.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+      });
+      btn.classList.add('bg-[#1D2A3D]', 'text-white');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+
+      // Filter cards
+      postCards.forEach((card) => {
+        const cardCategories = card.getAttribute('data-post-categories') || '';
+        if (selected === 'all' || cardCategories.includes(selected)) {
+          (card as HTMLElement).style.display = '';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

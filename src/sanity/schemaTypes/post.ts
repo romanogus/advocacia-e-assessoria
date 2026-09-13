@@ -60,6 +60,14 @@ export const post = defineType({
 			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
+			name: "featured",
+			title: "Artigo em Destaque",
+			type: "boolean",
+			group: "conteudo",
+			description: "Se ativado, este artigo será exibido com destaque especial no topo da página do Blog.",
+			initialValue: false,
+		}),
+		defineField({
 			name: "mainImage",
 			title: "Imagem de Capa",
 			type: "image",
@@ -124,12 +132,14 @@ export const post = defineType({
 			author: "author.name",
 			media: "mainImage",
 			status: "status",
+			featured: "featured",
 		},
 		prepare(selection) {
-			const { title, author, media, status } = selection;
+			const { title, author, media, status, featured } = selection;
 			const statusEmoji = status === "publicado" ? "✅" : "📝";
+			const star = featured ? "⭐ " : "";
 			return {
-				title: `${statusEmoji} ${title}`,
+				title: `${star}${statusEmoji} ${title}`,
 				subtitle: author ? `por ${author}` : "",
 				media,
 			};
