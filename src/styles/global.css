@@ -15,7 +15,12 @@
 
 html {
   scroll-behavior: smooth;
-  scrollbar-gutter: stable;
+}
+
+@media (min-width: 768px) {
+  html {
+    scrollbar-gutter: stable;
+  }
 }
 
 ::selection {

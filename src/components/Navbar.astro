@@ -50,14 +50,14 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
   <!-- Mobile: Hamburger button (right side) -->
   <button
     id="menu-toggle"
-    class="md:hidden flex flex-col justify-center items-center w-11 h-11 rounded-lg hover:bg-[#1D2A3D]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1D2A3D]"
+    class="md:hidden flex flex-col justify-center items-center w-11 h-11 rounded-lg hover:bg-[#1D2A3D]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1D2A3D] relative"
     aria-label="Menu"
     aria-expanded="false"
     aria-controls="mobile-menu"
   >
-    <span class="hamburger-line w-6 h-0.5 bg-[#1D2A3D] mb-1.5 transition-all duration-300"></span>
-    <span class="hamburger-line w-6 h-0.5 bg-[#1D2A3D] mb-1.5 transition-all duration-300"></span>
-    <span class="hamburger-line w-6 h-0.5 bg-[#1D2A3D] transition-all duration-300"></span>
+    <span class="hamburger-line line-1 block w-6 h-0.5 bg-[#1D2A3D] mb-1.5 transition-all duration-300 origin-center"></span>
+    <span class="hamburger-line line-2 block w-6 h-0.5 bg-[#1D2A3D] mb-1.5 transition-all duration-300"></span>
+    <span class="hamburger-line line-3 block w-6 h-0.5 bg-[#1D2A3D] transition-all duration-300 origin-center"></span>
   </button>
 
   <!-- Mobile navigation overlay -->
@@ -81,42 +81,48 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
   </div>
 </header>
 
+<style>
+  .menu-open .line-1 {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .menu-open .line-2 {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .menu-open .line-3 {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+</style>
+
 <script>
   const menuToggle = document.getElementById('menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
-  const hamburgerLines = document.querySelectorAll('.hamburger-line');
   const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
   const mainEl = document.querySelector('main');
-  const footerEl = document.querySelector('footer');
 
   let isOpen = false;
 
   function toggleMenu() {
     isOpen = !isOpen;
 
-    // Update aria-expanded
+    // Update aria-expanded & animate icon
     menuToggle?.setAttribute('aria-expanded', String(isOpen));
+    menuToggle?.classList.toggle('menu-open', isOpen);
+
+    const fab = document.querySelector('.whatsapp-fab');
 
     if (isOpen) {
       mobileMenu?.classList.remove('hidden');
       // Lock body scroll and trap focus
       document.body.style.overflow = 'hidden';
       mainEl?.setAttribute('inert', '');
-      footerEl?.setAttribute('inert', '');
-      // Animate hamburger to X
-      hamburgerLines[0]?.classList.add('rotate-45', 'translate-y-2');
-      hamburgerLines[1]?.classList.add('opacity-0');
-      hamburgerLines[2]?.classList.add('-rotate-45', '-translate-y-2');
+      fab?.classList.add('opacity-0', 'pointer-events-none');
     } else {
       mobileMenu?.classList.add('hidden');
       // Unlock body scroll and release focus
       document.body.style.overflow = '';
       mainEl?.removeAttribute('inert');
-      footerEl?.removeAttribute('inert');
-      // Reset hamburger
-      hamburgerLines[0]?.classList.remove('rotate-45', 'translate-y-2');
-      hamburgerLines[1]?.classList.remove('opacity-0');
-      hamburgerLines[2]?.classList.remove('-rotate-45', '-translate-y-2');
+      fab?.classList.remove('opacity-0', 'pointer-events-none');
     }
   }
 

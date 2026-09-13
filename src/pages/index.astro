@@ -93,7 +93,7 @@ function getAreaData(title: string) {
 <Layout>
 	<section id="hero" class="min-h-[calc(75vh-4rem)] bg-[#D9D8D3] flex items-center relative overflow-hidden">
 		<div class="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-r from-[#B8924A] via-[#D4A857] to-[#F0D080]"></div>
-		<div class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16 w-full">
+		<div class="max-w-7xl mx-auto px-4 md:px-6 py-8 sm:py-12 md:py-16 w-full">
 			<div class="flex flex-col md:flex-row items-center gap-6 md:gap-10">
 
 				<!-- Left: Brand image -->
@@ -136,7 +136,7 @@ function getAreaData(title: string) {
 	</section>
 
 	<!-- Áreas de Atuação Section -->
-	<section id="areas" class="py-20 bg-[#1D2A3D]">
+	<section id="areas" class="py-20 bg-[#1D2A3D] overflow-hidden">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
 			<h2 class="text-4xl font-bold text-white mb-10">Áreas de Atuação</h2>
 			{areas.length === 0 ? (
@@ -281,20 +281,21 @@ function getAreaData(title: string) {
 						Entre em contato para agendar uma consulta ou tirar dúvidas diretamente com nossa equipe.
 					</p>
 					<div class="space-y-4">
-						<p class="flex items-center gap-3 text-slate-300">
+						<p class="flex flex-wrap items-center gap-2 sm:gap-3 text-slate-300">
 							<span class="font-medium text-white">Email:</span>
-							<a href="mailto:advogada.palomasantos@gmail.com" class="text-slate-300 hover:text-[#F0D080] transition-colors no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] rounded">
+							<a href="mailto:advogada.palomasantos@gmail.com" class="text-slate-300 hover:text-[#F0D080] transition-colors no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] rounded break-all">
 								advogada.palomasantos@gmail.com
 							</a>
 						</p>
-						<p class="flex items-center gap-3 text-slate-300">
+						<p class="flex flex-wrap items-center gap-2 sm:gap-3 text-slate-300">
 							<span class="font-medium text-white">WhatsApp:</span>
 							<a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-[#F0D080] transition-colors no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] rounded">
 								(11) 95530-4453
 							</a>
 						</p>
-						<p class="flex items-center gap-3 text-slate-300">
-							<span class="font-medium text-white">Atendimento:</span> São Paulo, SP — Atendimento Nacional 100% Digital
+						<p class="flex flex-wrap items-center gap-2 sm:gap-3 text-slate-300">
+							<span class="font-medium text-white">Atendimento:</span>
+							<span>São Paulo, SP — Atendimento Nacional 100% Digital</span>
 						</p>
 					</div>
 				</div>
