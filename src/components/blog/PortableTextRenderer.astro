@@ -89,15 +89,19 @@ const components = {
     margin-bottom: 0.5rem;
     padding-left: 0.25rem;
   }
-  .article-content a {
-    color: #B8924A;
+  .article-content p a,
+  .article-content li a,
+  .article-content blockquote a {
+    color: #7D5F23;
     text-decoration: underline;
     text-underline-offset: 3px;
     font-weight: 500;
     transition: color 0.2s;
   }
-  .article-content a:hover {
-    color: #D4A857;
+  .article-content p a:hover,
+  .article-content li a:hover,
+  .article-content blockquote a:hover {
+    color: #1D2A3D;
   }
   .article-content strong {
     color: #0F172A;
