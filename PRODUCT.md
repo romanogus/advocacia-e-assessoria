@@ -36,7 +36,7 @@ A modern, 100% digital Brazilian law practice combining technical rigor and ethi
 ## Brand Commitments
 
 - **Name:** Santos & Trevizan — Advocacia e Assessoria
-- **Key Leadership:** Paloma Santos (Advogada)
+- **Leadership:** Sócios fundadores (Sociedade de Advogados — Santos & Trevizan)
 - **Voice & Tone:** Empathetic, trustworthy, rigorous, clear, accessible, professional.
 - **Contact:** WhatsApp (+55 11 95530-4453), Email (advogada.palomasantos@gmail.com), Location (São Paulo, SP — Atendimento Nacional).
 
