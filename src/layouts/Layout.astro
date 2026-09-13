@@ -29,7 +29,7 @@ const {
   hideFooter = false,
 } = Astro.props;
 
-const gaId = import.meta.env.PUBLIC_GA_ID;
+const gaId = import.meta.env.PUBLIC_GA_ID || import.meta.env.GA_ID;
 const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://santostrevizan.com.br';
 const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? '' : '/'}${image}`;
@@ -83,13 +83,13 @@ const ogImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsW
 		{gaId && (
 			<>
 				<!-- Google tag (gtag.js) -->
-				<script type="text/partytown" is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
-				<script type="text/partytown" is:inline set:html={`
+				<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+				<script is:inline define:vars={{ gaId }}>
 					window.dataLayer = window.dataLayer || [];
 					function gtag(){dataLayer.push(arguments);}
 					gtag('js', new Date());
-					gtag('config', '${gaId}');
-				`} />
+					gtag('config', gaId);
+				</script>
 			</>
 		)}
 	</head>
