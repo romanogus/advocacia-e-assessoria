@@ -84,12 +84,13 @@ const ogImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsW
 			<>
 				<!-- Google tag (gtag.js) -->
 				<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
-				<script is:inline define:vars={{ gaId }}>
+				<script is:inline set:html={`
 					window.dataLayer = window.dataLayer || [];
 					function gtag(){dataLayer.push(arguments);}
+					window.gtag = gtag;
 					gtag('js', new Date());
-					gtag('config', gaId);
-				</script>
+					gtag('config', '${gaId}');
+				`} />
 			</>
 		)}
 	</head>
