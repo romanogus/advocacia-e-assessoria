@@ -1,0 +1,61 @@
+---
+const whatsappPhone = "5511955304453";
+const whatsappMessage = "Olá! Gostaria de mais informações sobre os serviços jurídicos.";
+const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(whatsappMessage)}`;
+const currentYear = new Date().getFullYear();
+---
+
+<footer id="contato" class="py-20 bg-[#1D2A3D] text-white" role="contentinfo">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+    <h2 class="text-4xl font-bold font-serif mb-8 text-white">Contato</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div>
+        <p class="text-lg text-slate-300 mb-6">
+          Entre em contato para agendar uma consulta ou tirar dúvidas diretamente com nossa equipe.
+        </p>
+        <div class="space-y-4">
+          <p class="flex flex-wrap items-center gap-2 sm:gap-3 text-slate-300">
+            <span class="font-medium text-white">Email:</span>
+            <a 
+              href="mailto:advogada.palomasantos@gmail.com" 
+              class="text-slate-300 hover:text-[#F0D080] transition-colors no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] rounded break-all"
+            >
+              advogada.palomasantos@gmail.com
+            </a>
+          </p>
+          <p class="flex flex-wrap items-center gap-2 sm:gap-3 text-slate-300">
+            <span class="font-medium text-white">WhatsApp:</span>
+            <a 
+              href={whatsappUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="text-slate-300 hover:text-[#F0D080] transition-colors no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] rounded"
+            >
+              (11) 95530-4453
+            </a>
+          </p>
+          <p class="flex flex-wrap items-center gap-2 sm:gap-3 text-slate-300">
+            <span class="font-medium text-white">Atendimento:</span>
+            <span>São Paulo, SP — Atendimento Nacional 100% Digital</span>
+          </p>
+        </div>
+      </div>
+      <div class="bg-[#243350] p-8 rounded-xl border border-[#B8924A]/25 flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-semibold font-serif mb-4 text-[#F0D080]">Horário de Atendimento</h3>
+          <p class="text-slate-300">Segunda a Sexta: 9h às 18h</p>
+          <p class="text-slate-300">Sábado: 9h às 12h (com agendamento prévio)</p>
+          <p class="text-xs text-slate-400 mt-4 border-t border-[#B8924A]/20 pt-3">
+            Mensagens enviadas via WhatsApp fora do horário comercial são recebidas e respondidas com prioridade no primeiro horário útil seguinte.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright and Legal Disclaimer Bar -->
+    <div class="mt-16 pt-8 border-t border-[#243350] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+      <p>© {currentYear} Santos & Trevizan — Advocacia e Assessoria. Todos os direitos reservados.</p>
+      <p class="text-slate-400">Atendimento humanizado com alcance nacional.</p>
+    </div>
+  </div>
+</footer>

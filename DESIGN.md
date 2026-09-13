@@ -4,6 +4,7 @@ description: Classical Brazilian legal prestige balanced with warm, approachable
 colors:
   chamber-navy: "#1D2A3D"
   old-gold: "#B8924A"
+  accessible-gold: "#7D5F23"
   warm-parchment: "#D9D8D3"
   action-green: "#25D366"
   action-green-hover: "#20BA56"
@@ -56,7 +57,7 @@ spacing:
 components:
   button-primary:
     backgroundColor: "{colors.action-green}"
-    textColor: "{colors.white}"
+    textColor: "{colors.chamber-navy}"
     rounded: "{rounded.md}"
     padding: "16px 32px"
   button-primary-hover:
@@ -94,6 +95,7 @@ A dignified legal palette contrasting deep oceanic navy and warm parchment neutr
 
 ### Secondary
 - **Old Gold** (`#B8924A`): The mark of craft, rigor, and prestige. Used for linear corner brackets, icon strokes, subtle borders, and key subsection highlights.
+- **Accessible Gold** (`#7D5F23`): High-contrast shade of Old Gold (4.8:1 on light surfaces) ensuring WCAG AA compliance for inline article links and text accents where standard Old Gold lacks sufficient contrast.
 - **Highlight Gold** (`#F0D080`): Used as a radiant hover glow and gradient partner to Old Gold.
 - **Secondary Gold** (`#D4A857`): Used for subheadings and card section titles on dark surfaces.
 

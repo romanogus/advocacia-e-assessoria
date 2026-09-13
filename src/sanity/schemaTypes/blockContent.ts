@@ -75,5 +75,104 @@ export const blockContent = defineType({
 				},
 			],
 		}),
+		defineArrayMember({
+			name: "callout",
+			title: "Destaque Jurídico / Alerta",
+			type: "object",
+			fields: [
+				{
+					name: "type",
+					title: "Tipo de Destaque",
+					type: "string",
+					initialValue: "tip",
+					options: {
+						list: [
+							{ title: "💡 Dica Jurídica", value: "tip" },
+							{ title: "⚠️ Atenção / Prazo Crítico", value: "warning" },
+							{ title: "⚖️ O Que Diz a Lei / Decisões", value: "legal" },
+							{ title: "ℹ️ Informação Importante", value: "info" },
+						],
+						layout: "radio",
+						direction: "horizontal",
+					},
+				},
+				{
+					name: "title",
+					title: "Título do Destaque (Opcional)",
+					type: "string",
+					placeholder: "Ex: Dica Importante sobre Abatimento de Despesas",
+				},
+				{
+					name: "text",
+					title: "Texto do Destaque",
+					type: "text",
+					rows: 3,
+					validation: (Rule) => Rule.required().error("O texto do destaque é obrigatório."),
+				},
+			],
+			preview: {
+				select: {
+					title: "title",
+					text: "text",
+					type: "type",
+				},
+				prepare(selection) {
+					const { title, text, type } = selection;
+					const emojiMap: Record<string, string> = {
+						tip: "💡 Dica:",
+						warning: "⚠️ Atenção:",
+						legal: "⚖️ Lei/Decisão:",
+						info: "ℹ️ Nota:",
+					};
+					return {
+						title: title || emojiMap[type] || "Destaque",
+						subtitle: text,
+					};
+				},
+			},
+		}),
+		defineArrayMember({
+			name: "articleCta",
+			title: "Chamada para WhatsApp (CTA)",
+			type: "object",
+			fields: [
+				{
+					name: "title",
+					title: "Título da Chamada",
+					type: "string",
+					placeholder: "Ex: Teve o benefício negado pelo INSS?",
+					initialValue: "Precisa de orientação jurídica sobre este assunto?",
+				},
+				{
+					name: "description",
+					title: "Descrição Breve",
+					type: "string",
+					placeholder: "Ex: Nossa equipe pode analisar seu caso diretamente pelo WhatsApp.",
+					initialValue: "Fale com nossa equipe diretamente pelo WhatsApp para avaliar o seu caso.",
+				},
+				{
+					name: "buttonText",
+					title: "Texto do Botão",
+					type: "string",
+					initialValue: "Falar com Advogada no WhatsApp",
+				},
+				{
+					name: "customMessage",
+					title: "Mensagem Pré-configurada do WhatsApp (Opcional)",
+					type: "string",
+					placeholder: "Ex: Olá! Gostaria de uma consulta sobre o BPC/LOAS.",
+				},
+			],
+			preview: {
+				select: {
+					title: "title",
+				},
+				prepare(selection) {
+					return {
+						title: `📲 WhatsApp CTA: ${selection.title || "Falar com Advogada"}`,
+					};
+				},
+			},
+		}),
 	],
 });

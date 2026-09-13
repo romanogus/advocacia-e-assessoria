@@ -1,0 +1,110 @@
+---
+import { PortableText } from 'astro-portabletext';
+import CalloutBlock from './portabletext/CalloutBlock.astro';
+import ImageBlock from './portabletext/ImageBlock.astro';
+import CtaBlock from './portabletext/CtaBlock.astro';
+
+interface Props {
+  value: any;
+}
+
+const { value } = Astro.props;
+
+const components = {
+  type: {
+    callout: CalloutBlock,
+    image: ImageBlock,
+    articleCta: CtaBlock,
+  },
+};
+---
+
+<div class="article-content max-w-[68ch] mx-auto text-[#1E293B] text-lg leading-[1.85]">
+  <PortableText value={value} components={components} />
+</div>
+
+<style is:global>
+  .article-content > p {
+    margin-bottom: 1.5rem;
+    color: #1E293B;
+  }
+  .article-content > p:first-of-type {
+    font-size: 1.25rem;
+    line-height: 1.75;
+    color: #1E293B;
+    font-weight: 450;
+  }
+  .article-content > h2,
+  .article-content h2:not([class*="text-white"]) {
+    font-family: var(--font-family-serif, 'Lora', Georgia, serif);
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #1D2A3D;
+    margin-top: 2.75rem;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+    scroll-margin-top: 5rem;
+  }
+  .article-content > h3,
+  .article-content h3:not([class*="text-white"]) {
+    font-family: var(--font-family-serif, 'Lora', Georgia, serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1D2A3D;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.35;
+    scroll-margin-top: 5rem;
+  }
+  .article-content h4 {
+    font-family: var(--font-family-serif, 'Lora', Georgia, serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #243350;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .article-content blockquote {
+    border: 1px solid rgba(184, 146, 74, 0.3);
+    background-color: rgba(29, 42, 61, 0.03);
+    padding: 1.5rem 1.75rem;
+    margin: 2rem 0;
+    border-radius: 0.75rem;
+    font-style: italic;
+    color: #1E293B;
+  }
+  .article-content ul {
+    list-style-type: disc;
+    padding-left: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: #1E293B;
+  }
+  .article-content ol {
+    list-style-type: decimal;
+    padding-left: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: #1E293B;
+  }
+  .article-content li {
+    margin-bottom: 0.5rem;
+    padding-left: 0.25rem;
+  }
+  .article-content p a,
+  .article-content li a,
+  .article-content blockquote a {
+    color: #7D5F23;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .article-content p a:hover,
+  .article-content li a:hover,
+  .article-content blockquote a:hover {
+    color: #1D2A3D;
+  }
+  .article-content strong {
+    color: #0F172A;
+    font-weight: 600;
+  }
+</style>

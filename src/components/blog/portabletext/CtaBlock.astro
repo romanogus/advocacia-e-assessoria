@@ -1,0 +1,21 @@
+---
+import ArticleCTA from '../ArticleCTA.astro';
+
+interface Props {
+  node: {
+    title?: string;
+    description?: string;
+    buttonText?: string;
+    customMessage?: string;
+  };
+}
+
+const { node } = Astro.props;
+---
+
+<ArticleCTA
+  title={node.title}
+  description={node.description}
+  buttonText={node.buttonText}
+  whatsappMessage={node.customMessage}
+/>

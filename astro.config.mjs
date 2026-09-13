@@ -8,7 +8,6 @@ import tailwindcss from '@tailwindcss/vite';
 import sanity from '@sanity/astro';
 import react from '@astrojs/react';
 import vercel from '@astrojs/vercel';
-import partytown from '@astrojs/partytown';
 
 // https://astro.build/config
 export default defineConfig({
@@ -24,11 +23,6 @@ export default defineConfig({
       studioBasePath: '/studio'
     }),
     react(),
-    partytown({
-      config: {
-        forward: ['dataLayer.push'],
-      },
-    }),
   ],
 
   vite: {
