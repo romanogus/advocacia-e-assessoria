@@ -120,6 +120,7 @@ function getAreaData(title: string) {
 							href={whatsappUrl}
 							target="_blank"
 							rel="noopener noreferrer"
+							data-analytics-placement="hero"
 							class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] hover:bg-[#20ba56] text-[#1D2A3D] text-lg font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] focus-visible:ring-offset-2"
 							aria-label="Falar com um advogado via WhatsApp"
 						>
@@ -145,11 +146,14 @@ function getAreaData(title: string) {
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 					{areas.map((area: any, idx: number) => {
 						const data = getAreaData(area.title);
+						const areaKey = area.title?.toLowerCase().includes('trabalhist') ? 'trabalhista' : area.title?.toLowerCase().includes('civil') ? 'civil' : area.title?.toLowerCase().includes('previdenci') ? 'previdenciario' : area.title;
 						return (
 							<a
 								href={getAreaWhatsAppUrl(area.title)}
 								target="_blank"
 								rel="noopener noreferrer"
+								data-analytics-placement="areas_card"
+								data-analytics-area={areaKey}
 								aria-label={`Consultar advogado especialista em ${area.title} via WhatsApp`}
 								class={`group relative bg-[#243350] hover:bg-[#293a5a] border border-[#B8924A]/25 hover:border-[#F0D080]/50 rounded-xl p-5 sm:p-7 flex flex-col min-h-0 md:min-h-[460px] cursor-pointer transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-xl no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] ${idx === 2 ? 'md:col-span-2 md:max-w-md md:mx-auto lg:col-span-1 lg:max-w-none lg:mx-0' : ''}`}
 							>

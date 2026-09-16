@@ -30,6 +30,7 @@ const {
 } = Astro.props;
 
 const gaId = import.meta.env.PUBLIC_GA_ID || import.meta.env.GA_ID;
+const gtmId = import.meta.env.PUBLIC_GTM_ID || import.meta.env.GTM_ID || 'GTM-MPCGZR87';
 const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://santostrevizan.com.br';
 const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? '' : '/'}${image}`;
@@ -80,21 +81,99 @@ const ogImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsW
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImageUrl} />
 
-		{gaId && (
+		{gtmId && (
+			<!-- Google Tag Manager -->
+			<script is:inline set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer','${gtmId}');`} />
+			<!-- End Google Tag Manager -->
+		)}
+
+		{!gtmId && gaId && (
 			<>
-				<!-- Google tag (gtag.js) -->
+				<!-- Google tag (gtag.js) direct fallback -->
 				<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
 				<script is:inline set:html={`
 					window.dataLayer = window.dataLayer || [];
 					function gtag(){dataLayer.push(arguments);}
 					window.gtag = gtag;
 					gtag('js', new Date());
-					gtag('config', '${gaId}');
+					gtag('config', '${gaId}', {
+						debug_mode: true
+					});
 				`} />
 			</>
 		)}
+
+		<!-- Analytics Lead Tracking (dataLayer & gtag) -->
+		<script is:inline set:html={`
+			window.dataLayer = window.dataLayer || [];
+			window.addEventListener('click', function(e) {
+				var target = e.target;
+				if (!target || !target.closest) return;
+
+				// Track WhatsApp link clicks
+				var waLink = target.closest('a[href*="wa.me"]');
+				if (waLink) {
+					var placement = waLink.getAttribute('data-analytics-placement') || 'unknown';
+					var area = waLink.getAttribute('data-analytics-area') || '';
+					var label = waLink.getAttribute('aria-label') || (waLink.textContent && waLink.textContent.trim()) || 'whatsapp_button';
+
+					window.dataLayer.push({
+						event: 'lead_whatsapp',
+						placement: placement,
+						area: area,
+						event_label: label,
+						link_url: waLink.href
+					});
+
+					if (typeof window.gtag === 'function') {
+						window.gtag('event', 'click_whatsapp', {
+							event_category: 'lead',
+							event_label: label,
+							placement: placement,
+							area: area,
+							link_url: waLink.href,
+							transport_type: 'beacon'
+						});
+					}
+				}
+
+				// Track Email link clicks
+				var emailLink = target.closest('a[href^="mailto:"]');
+				if (emailLink) {
+					var emailPlacement = emailLink.getAttribute('data-analytics-placement') || 'footer';
+					var emailLabel = emailLink.getAttribute('aria-label') || (emailLink.textContent && emailLink.textContent.trim()) || 'email_link';
+
+					window.dataLayer.push({
+						event: 'lead_email',
+						placement: emailPlacement,
+						event_label: emailLabel,
+						link_url: emailLink.href
+					});
+
+					if (typeof window.gtag === 'function') {
+						window.gtag('event', 'click_email', {
+							event_category: 'lead',
+							event_label: emailLabel,
+							placement: emailPlacement,
+							link_url: emailLink.href,
+							transport_type: 'beacon'
+						});
+					}
+				}
+			});
+		`} />
 	</head>
 	<body class="m-0 w-full min-h-screen flex flex-col bg-[#F9F9F8]">
+		{gtmId && (
+			<!-- Google Tag Manager (noscript) -->
+			<noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+			height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+			<!-- End Google Tag Manager (noscript) -->
+		)}
 		<Navbar />
 		<main class="pt-16 min-h-screen flex-1">
 			<slot />
