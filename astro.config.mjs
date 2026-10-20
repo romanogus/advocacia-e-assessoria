@@ -11,6 +11,7 @@ import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://www.paloma-santos.adv.br',
   output: 'server',
   adapter: vercel(),
   integrations: [

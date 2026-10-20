@@ -63,7 +63,8 @@ const readingTimeMinutes = getReadingTimeMinutes(textForEstimate);
 // Check if an in-body CTA is already present to prevent redundant CTA clustering
 const hasInBodyCta = Array.isArray(post.body) && post.body.some((b: any) => b._type === 'articleCta');
 
-const canonicalUrl = new URL(Astro.url.pathname, 'https://santostrevizan.com.br').toString();
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://www.paloma-santos.adv.br';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 const shareWhatsAppUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${post.title} — Leia em: ${canonicalUrl}`)}`;
 
 const schemaJson = {
@@ -71,7 +72,7 @@ const schemaJson = {
   '@type': 'BlogPosting',
   headline: post.title,
   description: post.excerpt,
-  image: coverUrl || 'https://santostrevizan.com.br/og-image.jpg',
+  image: coverUrl || `${siteUrl}/og-image.jpg`,
   datePublished: post.publishedAt,
   author: {
     '@type': 'Person',
@@ -83,7 +84,7 @@ const schemaJson = {
     name: 'Paloma Santos — Advocacia Especializada',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://santostrevizan.com.br/brand-emblem.png',
+      url: `${siteUrl}/brand-emblem.png`,
     },
   },
   mainEntityOfPage: {
