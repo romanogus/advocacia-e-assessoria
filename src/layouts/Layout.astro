@@ -113,6 +113,14 @@ const ogImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsW
 		<!-- Analytics Lead Tracking (dataLayer & gtag) -->
 		<script is:inline set:html={`
 			window.dataLayer = window.dataLayer || [];
+
+			// Block the right-click menu and drag-out on images (deterrent only; it does not stop screenshots or devtools)
+			['contextmenu', 'dragstart'].forEach(function(type) {
+				document.addEventListener(type, function(e) {
+					if (e.target && e.target.closest && e.target.closest('img, picture')) e.preventDefault();
+				});
+			});
+
 			window.addEventListener('click', function(e) {
 				var target = e.target;
 				if (!target || !target.closest) return;

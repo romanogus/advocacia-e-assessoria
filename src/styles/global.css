@@ -17,6 +17,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Discourage casual image saving: no drag-out, no iOS long-press "Save Image" sheet (paired with the contextmenu guard in Layout.astro). */
+img {
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
