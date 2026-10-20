@@ -27,3 +27,10 @@ pnpm-debug.log*
 
 # graft's local graph cache — regenerable, not committed (run `graft build`).
 /graft/
+
+# Impeccable live-mode runtime state (server port/PID, sessions, annotations)
+.impeccable/live/
+
+# Claude Code per-machine config (local permissions, dev-server port)
+.claude/settings.local.json
+.claude/launch.json

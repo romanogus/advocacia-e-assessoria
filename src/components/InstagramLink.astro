@@ -1,0 +1,37 @@
+---
+import { siInstagram } from 'simple-icons';
+
+interface Props {
+  placement: 'sobre' | 'author_bio' | 'footer';
+  /** Surface the link sits on: picks a focus ring that clears 3:1 against it. */
+  tone?: 'light' | 'dark';
+  /** Set when a visible "Instagram" label already precedes the link. */
+  labelled?: boolean;
+  class?: string;
+}
+
+const { placement, tone = 'light', labelled = false, class: className = '' } = Astro.props;
+
+const instagramHandle = "advogada.palomasantos";
+const instagramUrl = `https://www.instagram.com/${instagramHandle}/`;
+---
+
+<a
+  href={instagramUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  data-analytics-placement={placement}
+  class:list={[
+    // The ::after pseudo-element widens the tap area to ~48px (40px on the dense footer list) without shifting layout.
+    "relative inline-flex items-center gap-2 rounded transition-colors no-underline focus-visible:outline-hidden focus-visible:ring-2 after:absolute after:-inset-x-2 after:content-['']",
+    tone === 'dark'
+      ? 'focus-visible:ring-[#B8924A] after:-inset-y-2'
+      : 'focus-visible:ring-[#7D5F23] focus-visible:ring-offset-2 after:-inset-y-3.5',
+    className,
+  ]}
+>
+  <svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d={siInstagram.path} />
+  </svg>
+  <span>{!labelled && <span class="sr-only">Instagram </span>}@{instagramHandle}<span class="sr-only"> (abre em nova aba)</span></span>
+</a>

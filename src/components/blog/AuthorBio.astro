@@ -1,5 +1,6 @@
 ---
 import { urlForImage } from '../../lib/sanity.image';
+import InstagramLink from '../InstagramLink.astro';
 
 interface Props {
   name?: string;
@@ -71,5 +72,10 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(`O
       </svg>
       <span>Conversar diretamente com a advogada</span>
     </a>
+
+    <p class="mt-4 text-sm text-slate-600">
+      Acompanhe mais conteúdos no Instagram:
+      <InstagramLink placement="author_bio" labelled class="align-middle font-medium text-[#7D5F23] hover:text-[#1D2A3D]" />
+    </p>
   </div>
 </div>

@@ -1,8 +1,6 @@
 ---
-import { siInstagram } from 'simple-icons';
+import InstagramLink from './InstagramLink.astro';
 
-const instagramHandle = "advogada.palomasantos";
-const instagramUrl = `https://www.instagram.com/${instagramHandle}/`;
 const whatsappPhone = "5511955304453";
 const whatsappMessage = "Olá! Gostaria de mais informações sobre os serviços jurídicos.";
 const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(whatsappMessage)}`;
@@ -37,26 +35,16 @@ const currentYear = new Date().getFullYear();
               rel="noopener noreferrer" 
               data-analytics-placement="footer"
               aria-label="Falar no WhatsApp via rodapé"
+              aria-describedby="footer-whatsapp-newtab"
               class="text-slate-300 hover:text-[#F0D080] transition-colors no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] rounded"
             >
               (11) 95530-4453
             </a>
+            <span id="footer-whatsapp-newtab" class="sr-only">Abre em nova aba</span>
           </p>
           <p class="flex flex-wrap items-center gap-2 sm:gap-3 text-slate-300">
             <span class="font-medium text-white">Instagram:</span>
-            <a
-              href={instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-analytics-placement="footer"
-              aria-label={`Instagram @${instagramHandle} (abre em nova aba)`}
-              class="inline-flex items-center gap-2 text-slate-300 hover:text-[#F0D080] transition-colors no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] rounded"
-            >
-              <svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d={siInstagram.path} />
-              </svg>
-              @{instagramHandle}
-            </a>
+            <InstagramLink placement="footer" tone="dark" labelled class="text-slate-300 hover:text-[#F0D080]" />
           </p>
           <p class="flex flex-wrap items-center gap-2 sm:gap-3 text-slate-300">
             <span class="font-medium text-white">Atendimento:</span>

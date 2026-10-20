@@ -144,6 +144,27 @@ const ogImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsW
 					}
 				}
 
+				// Track Instagram profile clicks (engagement, not a lead)
+				var igLink = target.closest('a[href*="instagram.com"]');
+				if (igLink) {
+					var igPlacement = igLink.getAttribute('data-analytics-placement') || 'unknown';
+
+					window.dataLayer.push({
+						event: 'social_instagram',
+						placement: igPlacement,
+						link_url: igLink.href
+					});
+
+					if (typeof window.gtag === 'function') {
+						window.gtag('event', 'click_instagram', {
+							event_category: 'social',
+							placement: igPlacement,
+							link_url: igLink.href,
+							transport_type: 'beacon'
+						});
+					}
+				}
+
 				// Track Email link clicks
 				var emailLink = target.closest('a[href^="mailto:"]');
 				if (emailLink) {
