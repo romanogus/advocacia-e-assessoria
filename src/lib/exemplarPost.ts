@@ -28,10 +28,10 @@ export const exemplarPost: BlogPost = {
   publishedAt: '2026-09-13T10:00:00.000Z',
   featured: true,
   author: {
-    name: 'Dra. Paloma André dos Santos',
-    role: 'Advogada — Especialista em Direito Previdenciário e Trabalhista',
-    bio: 'Advogada fundadora de Santos & Trevizan, com atuação humanizada e especializada na defesa de segurados da Previdência Social e trabalhadores em todo o território nacional.',
-    oab: 'Inscrição OAB/SP',
+    name: 'Dra. Paloma Santos',
+    role: 'Advogada — Direito Previdenciário, Trabalhista, Civil, Bancário e Tributário',
+    bio: 'Advogada com atuação voltada ao Direito Previdenciário e às áreas Trabalhista, Civil, Bancária e Tributária, com atendimento humanizado em todo o território nacional.',
+    oab: 'OAB/SP 490.797',
   },
   categories: [
     { title: 'Previdenciário', slug: { current: 'previdenciario' } },
@@ -163,7 +163,7 @@ export const exemplarPost: BlogPost = {
       _type: 'articleCta',
       _key: 'cta1',
       title: 'Recebeu a notificação ou está com medo de perder o BPC?',
-      description: 'Nossa equipe jurídica pode conferir o cálculo da sua renda familiar e orientar a documentação médica adequada para evitar que seu pagamento seja interrompido.',
+      description: 'Posso conferir o cálculo da sua renda familiar e orientar a documentação médica adequada para evitar que seu pagamento seja interrompido.',
       buttonText: 'Tirar Dúvidas com a Dra. Paloma',
       customMessage: 'Olá, Dra. Paloma! Li seu artigo sobre o pente-fino do BPC/LOAS e gostaria de auxílio para regularizar o benefício.',
     },

@@ -21,7 +21,7 @@ let post = await sanityClient.fetch(
     publishedAt,
     mainImage,
     body,
-    author->{ name, role, image, bio },
+    author->{ name, role, image, bio, oab },
     categories[]->{ title, slug }
   }`,
   { slug }
@@ -37,8 +37,8 @@ if (!post) {
 }
 
 const primaryCategory = post.categories?.[0]?.title || 'Direito Previdenciário';
-const authorName = post.author?.name || 'Dra. Paloma André dos Santos';
-const authorRole = post.author?.role || 'Advogada — Especialista em Direito Previdenciário e Trabalhista';
+const authorName = post.author?.name || 'Dra. Paloma Santos';
+const authorRole = post.author?.role || 'Advogada — Direito Previdenciário, Trabalhista, Civil, Bancário e Tributário';
 
 const coverUrl = post.mainImage
   ? urlForImage(post.mainImage)?.width(1200).height(675).url()
@@ -71,7 +71,7 @@ const schemaJson = {
   '@type': 'BlogPosting',
   headline: post.title,
   description: post.excerpt,
-  image: coverUrl || 'https://santostrevizan.com.br/brand.png',
+  image: coverUrl || 'https://santostrevizan.com.br/og-image.jpg',
   datePublished: post.publishedAt,
   author: {
     '@type': 'Person',
@@ -80,10 +80,10 @@ const schemaJson = {
   },
   publisher: {
     '@type': 'Organization',
-    name: 'Santos & Trevizan — Advocacia e Assessoria',
+    name: 'Paloma Santos — Advocacia Especializada',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://santostrevizan.com.br/brand.png',
+      url: 'https://santostrevizan.com.br/brand-emblem.png',
     },
   },
   mainEntityOfPage: {
@@ -94,9 +94,9 @@ const schemaJson = {
 ---
 
 <Layout
-  title={`${post.title} — Santos & Trevizan`}
-  description={post.excerpt || 'Artigo jurídico por Santos & Trevizan — Advocacia e Assessoria.'}
-  image={coverUrl || '/brand.png'}
+  title={`${post.title} — Paloma Santos`}
+  description={post.excerpt || 'Artigo jurídico por Paloma Santos — Advocacia Especializada.'}
+  image={coverUrl || '/og-image.jpg'}
   article={{
     publishedTime: post.publishedAt,
     author: authorName,
@@ -227,7 +227,7 @@ const schemaJson = {
       <!-- Closing Lead Gen CTA (adapts context if an in-body CTA was already placed) -->
       <ArticleCTA
         title={hasInBodyCta ? "Próximos Passos: Precisa de Análise do Seu Caso?" : "Dúvidas sobre o conteúdo deste artigo?"}
-        description={hasInBodyCta ? "Nossa equipe jurídica especializada pode analisar a sua documentação e traçar a melhor estratégia para resguardar seus direitos de forma sigilosa." : "Se você está enfrentando uma situação semelhante, agende uma conversa com nossos advogados pelo WhatsApp para esclarecer seu caso de forma sigilosa."}
+        description={hasInBodyCta ? "Posso analisar a sua documentação e traçar a melhor estratégia para resguardar seus direitos de forma sigilosa." : "Se você está enfrentando uma situação semelhante, agende uma conversa comigo pelo WhatsApp para esclarecer seu caso de forma sigilosa."}
         buttonText="Agendar Análise pelo WhatsApp"
         articleTitle={post.title}
       />
@@ -238,7 +238,7 @@ const schemaJson = {
         role={authorRole}
         bio={post.author?.bio}
         image={post.author?.image}
-        oab={post.author?.oab || "Inscrição OAB/SP"}
+        oab={post.author?.oab || "OAB/SP 490.797"}
       />
 
       <!-- Back to Blog Link -->

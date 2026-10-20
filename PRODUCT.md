@@ -12,11 +12,11 @@ Individual clients and families across Brazil in need of legal counsel and dispu
 
 ## Product Purpose
 
-Provide an accessible, transparent, and humanized digital legal consultancy for Santos & Trevizan — Advocacia e Assessoria. The website communicates the firm's practice areas, establishes professional credibility, and enables potential clients anywhere in Brazil to obtain immediate legal guidance and consultation through direct WhatsApp channels, video calls, and email.
+Provide an accessible, transparent, and humanized digital legal consultancy for Paloma Santos — Advocacia Especializada. The website communicates the firm's practice areas, establishes professional credibility, and enables potential clients anywhere in Brazil to obtain immediate legal guidance and consultation through direct WhatsApp channels, video calls, and email.
 
 ## Positioning
 
-A modern, 100% digital Brazilian law practice combining technical rigor and ethical transparency with accessible, empathetic client communication. Unlike traditional, opaque law firms that require in-person visits and use intimidating legal jargon, Santos & Trevizan delivers responsive, nationwide legal assistance with clear explanations and rapid triage via WhatsApp.
+A modern, 100% digital Brazilian law practice combining technical rigor and ethical transparency with accessible, empathetic client communication. Unlike traditional, opaque law firms that require in-person visits and use intimidating legal jargon, Paloma Santos delivers responsive, nationwide legal assistance with clear explanations and rapid triage via WhatsApp.
 
 ## Operating Context
 
@@ -29,20 +29,21 @@ A modern, 100% digital Brazilian law practice combining technical rigor and ethi
 - **Practice Areas:**
   - **Direito Trabalhista:** Rescisão contratual, horas extras, adicionais (insalubridade, periculosidade), FGTS, verbas rescisórias.
   - **Direito Previdenciário:** Aposentadorias, pensão por morte, benefícios por incapacidade (auxílio-doença, BPC/LOAS).
-  - **Direito Civil & Família:** Análise e elaboração de contratos, direito do consumidor, divórcio, partilha de bens, inventários judiciais e extrajudiciais.
+  - **Direito Civil, Consumidor & Bancário:** Análise e elaboração de contratos, direito do consumidor, divórcio, partilha de bens, inventários judiciais e extrajudiciais. Superendividamento e descontos abusivos de consignados (Lei 14.181/2021).
+  - **Direito Tributário (pessoa física):** Isenção de IR por doença grave para aposentados e pensionistas (Lei 7.713/88) e restituição retroativa.
 - **Technical Stack:** Astro 6, Tailwind CSS v4, Sanity CMS (content management for blog posts and practice areas), Svelte / React components.
 - **Constraints:** Compliance with Brazilian Bar Association (OAB) ethical rules regarding legal advertising (informative, educational, non-mercantile communication).
 
 ## Brand Commitments
 
-- **Name:** Santos & Trevizan — Advocacia e Assessoria
-- **Leadership:** Sócios fundadores (Sociedade de Advogados — Santos & Trevizan)
+- **Name:** Paloma Santos — Advocacia Especializada
+- **Leadership:** Dra. Paloma Santos — OAB/SP 490.797 (advocacia individual)
 - **Voice & Tone:** Empathetic, trustworthy, rigorous, clear, accessible, professional.
 - **Contact:** WhatsApp (+55 11 95530-4453), Email (advogada.palomasantos@gmail.com), Location (São Paulo, SP — Atendimento Nacional).
 
 ## Evidence on Hand
 
-- Core identity assets: `/brand.webp`, `/favicon.svg`.
+- Core identity assets: `src/assets/brand-emblem.webp` (circular PS emblem), `/og-image.jpg`, `/favicon.ico`, `/apple-touch-icon.png`; portrait `src/assets/paloma-santos.webp`.
 - Sanity CMS integration managing dynamic `areaDeAtuacao` and `post` schemas.
 - Existing landing page implementation detailing practice areas, firm profile, ethical pillars, and structured WhatsApp contact actions.
 

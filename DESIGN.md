@@ -1,5 +1,5 @@
 ---
-name: Santos & Trevizan — Advocacia e Assessoria
+name: Paloma Santos — Advocacia Especializada
 description: Classical Brazilian legal prestige balanced with warm, approachable clarity
 colors:
   chamber-navy: "#1D2A3D"
@@ -71,13 +71,13 @@ components:
     backgroundColor: "{colors.card-navy-hover}"
 ---
 
-# Design System: Santos & Trevizan — Advocacia e Assessoria
+# Design System: Paloma Santos — Advocacia Especializada
 
 ## Overview
 
 **Creative North Star: "The Dignified Advocate"**
 
-The Santos & Trevizan visual system balances the gravitas and rigor of Brazilian jurisprudence with warm, empathetic modern clarity. Legal representation often meets clients at moments of high anxiety—disputed dismissals, blocked retirement claims, complex family inheritances. The interface conveys steadfast technical competence without the cold intimidation or bureaucratic obscurity of classical law firms.
+The Paloma Santos visual system balances the gravitas and rigor of Brazilian jurisprudence with warm, empathetic modern clarity. Legal representation often meets clients at moments of high anxiety—disputed dismissals, blocked retirement claims, complex family inheritances. The interface conveys steadfast technical competence without the cold intimidation or bureaucratic obscurity of classical law firms.
 
 Visual weight rests on Chamber Navy (`#1D2A3D`) anchored by Warm Parchment (`#D9D8D3`) surfaces and Old Gold (`#B8924A`) accents. Warm typography pairs the literary authority of *Lora* and *Merriweather* for headings with the effortless scanability of *Lato* for body text. Crucially, direct client action is illuminated by a prominent Action Green (`#25D366`) WhatsApp pathway, assuring immediate human connection across Brazil.
 

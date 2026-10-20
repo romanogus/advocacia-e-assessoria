@@ -37,7 +37,7 @@ const authorImageUrl = post.author?.image
   ? urlForImage(post.author.image)?.width(80).height(80).url() 
   : null;
 
-const authorName = post.author?.name || "Dra. Paloma André dos Santos";
+const authorName = post.author?.name || "Dra. Paloma Santos";
 
 const formattedDate = post.publishedAt
   ? new Date(post.publishedAt).toLocaleDateString('pt-BR', {
@@ -71,10 +71,10 @@ const readingTimeMinutes = getReadingTimeMinutes(textForEstimate);
       <!-- Dignified Brand Fallback Pattern -->
       <div class="w-full h-full min-h-[220px] bg-gradient-to-br from-[#1D2A3D] via-[#243350] to-[#121B27] flex flex-col items-center justify-center p-6 text-center">
         <div class="w-14 h-14 rounded-full bg-[#B8924A]/20 border border-[#B8924A]/40 flex items-center justify-center text-[#F0D080] font-serif text-xl font-bold mb-3">
-          ST
+          PS
         </div>
         <span class="text-xs uppercase tracking-widest text-[#D4A857] font-medium">
-          Santos & Trevizan
+          Paloma Santos
         </span>
       </div>
     )}

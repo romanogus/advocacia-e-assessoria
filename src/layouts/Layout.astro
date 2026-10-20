@@ -22,9 +22,9 @@ interface Props {
 }
 
 const {
-  title = "Santos & Trevizan — Advocacia e Assessoria",
-  description = "Santos & Trevizan — Advocacia e Assessoria Jurídica. Atendimento humanizado com alcance nacional em Direito Trabalhista, Civil e Previdenciário. Consulta online por WhatsApp, videochamada e e-mail.",
-  image = "/brand.png",
+  title = "Paloma Santos — Advocacia Especializada",
+  description = "Paloma Santos — Advocacia Especializada (OAB/SP 490.797). Advocacia ágil, estratégica e humana, com atendimento online em todo o Brasil em Direito Previdenciário, Trabalhista, Civil, Bancário e Tributário.",
+  image = "/og-image.jpg",
   article,
   canonical,
   hideFooter = false,
@@ -42,8 +42,10 @@ const ogImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsW
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<link rel="canonical" href={canonicalUrl} />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,7 +63,7 @@ const ogImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsW
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={ogImageUrl} />
-		<meta property="og:site_name" content="Santos & Trevizan — Advocacia e Assessoria" />
+		<meta property="og:site_name" content="Paloma Santos — Advocacia Especializada" />
 		<meta property="og:locale" content="pt_BR" />
 
 		{article && (

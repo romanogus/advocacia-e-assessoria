@@ -1,9 +1,12 @@
 ---
 // Top navigation bar component
+import { Image } from 'astro:assets';
+import brandEmblem from '../assets/brand-emblem.webp';
+
 const navItems = [
   { href: '/', label: 'Início' },
   { href: '/#areas', label: 'Áreas de Atuação' },
-  { href: '/#sobre', label: 'Sobre' },
+  { href: '/#sobre', label: 'Quem sou eu' },
   { href: '/blog', label: 'Blog' },
   { href: '/#contato', label: 'Contato' },
 ];
@@ -19,17 +22,22 @@ const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(wh
   <a
     id="brand-logo"
     href="/"
-    aria-label="Santos & Trevizan — página inicial"
-    class="transition-opacity duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1D2A3D] rounded"
+    aria-label="Paloma Santos — página inicial"
+    class="flex items-center gap-3 transition-opacity duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1D2A3D] rounded"
   >
-    <img
-      src="/brand-nav.webp"
-      alt="Santos & Trevizan"
-      width="509"
-      height="142"
-      class="h-10 md:h-10 w-auto object-contain"
+    <Image
+      src={brandEmblem}
+      alt=""
+      width={44}
+      height={44}
+      densities={[1, 2, 3]}
+      class="h-11 w-11 shrink-0 drop-shadow-sm"
       loading="eager"
     />
+    <span class="flex flex-col leading-none">
+      <span class="text-lg font-bold" style="color: #1D2A3D; font-family: var(--font-family-serif);">Paloma Santos</span>
+      <span class="mt-1 text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-[#7D5F23]">Advocacia Especializada</span>
+    </span>
   </a>
 
   <!-- Right: Desktop nav -->

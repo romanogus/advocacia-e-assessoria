@@ -10,11 +10,11 @@ interface Props {
 }
 
 const {
-  name = "Dra. Paloma André dos Santos",
-  role = "Advogada — Especialista em Direito Previdenciário e Trabalhista",
-  bio = "Advogada fundadora de Santos & Trevizan, com foco em atendimento humanizado e resolução estratégica de conflitos trabalhistas e previdenciários. Atuação consultiva e contenciosa com alcance em todo o Brasil.",
+  name = "Dra. Paloma Santos",
+  role = "Advogada — Direito Previdenciário, Trabalhista, Civil, Bancário e Tributário",
+  bio = "Advogada com atuação voltada ao Direito Previdenciário e às áreas Trabalhista, Civil, Bancária e Tributária. Advocacia ágil, estratégica e humana, com atendimento online em todo o Brasil.",
   image,
-  oab = "Inscrição OAB/SP",
+  oab = "OAB/SP 490.797",
 } = Astro.props;
 
 const imageUrl = image ? urlForImage(image)?.width(240).height(240).url() : null;

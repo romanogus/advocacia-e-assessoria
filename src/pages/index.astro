@@ -2,6 +2,9 @@
 export const prerender = true;
 
 import Layout from '../layouts/Layout.astro';
+import { Picture } from 'astro:assets';
+import palomaPhoto from '../assets/paloma-santos.webp';
+import brandEmblem from '../assets/brand-emblem.webp';
 
 import { sanityClient } from 'sanity:client';
 
@@ -16,9 +19,9 @@ function getAreaWhatsAppUrl(title: string) {
   if (lower.includes('trabalhist')) {
     msg = "Olá! Gostaria de tirar dúvidas sobre Direito Trabalhista (rescisão, horas extras, direitos trabalhistas). Poderia me ajudar?";
   } else if (lower.includes('civil')) {
-    msg = "Olá! Gostaria de tirar dúvidas sobre Direito Civil (contratos, família, sucessões). Poderia me ajudar?";
+    msg = "Olá! Gostaria de tirar dúvidas sobre Direito Civil (contratos, consumidor, empréstimos e descontos bancários, família, sucessões). Poderia me ajudar?";
   } else if (lower.includes('previdenci')) {
-    msg = "Olá! Gostaria de tirar dúvidas sobre Direito Previdenciário (aposentadoria, benefícios, auxílios). Poderia me ajudar?";
+    msg = "Olá! Gostaria de tirar dúvidas sobre Direito Previdenciário (aposentadoria, benefícios, BPC/LOAS, isenção de Imposto de Renda). Poderia me ajudar?";
   }
   
   return `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(msg)}`;
@@ -63,7 +66,7 @@ const areaData: Record<string, {
     </svg>`,
     sections: [
       { heading: 'Análise e Elaboração de Contratos', text: 'Assessoria jurídica na elaboração, revisão e distrato de instrumentos particulares para conferir segurança e mitigar riscos em relações negociais.' },
-      { heading: 'Direito do Consumidor', text: 'Defesa dos direitos do consumidor em contratos de consumo, cobranças indevidas, práticas abusivas e indenizações por falha na prestação de serviços ou produtos.' },
+      { heading: 'Direito do Consumidor e Bancário', text: 'Defesa do consumidor contra cobranças indevidas e práticas abusivas, incluindo superendividamento e descontos excessivos de empréstimos consignados e cartões RMC/RCC, com base na proteção do mínimo existencial.' },
       { heading: 'Família e Planejamento Sucessório', text: 'Informações sobre divórcio consensual e litigioso, fixação de pensão alimentícia, termos de guarda de menores, partilha de bens e inventários judiciais ou extrajudiciais.' },
     ],
   },
@@ -74,9 +77,9 @@ const areaData: Record<string, {
       <path d="M15 36 Q15 30 24 30 Q33 30 33 36"/>
     </svg>`,
     sections: [
-      { heading: 'Aposentadorias e Pensão', text: 'Estudo e planejamento de aposentadoria por idade, tempo de contribuição ou especial, além dos critérios para concessão de pensão por morte aos dependentes.' },
-      { heading: 'Benefícios por Incapacidade', text: 'Informações objetivas sobre os requisitos exigidos pelo INSS para concessão e restabelecimento de auxílio-doença, aposentadoria por invalidez e auxílio-acidente.' },
-      { heading: 'Benefício Assistencial', text: 'Informações sobre requisitos para concessão do Benefício de Prestação Continuada (BPC/LOAS) a idosos e pessoas com deficiência, além de auxílio na emissão do CadÚnico.' },
+      { heading: 'Aposentadorias, Pensão e Salário-Maternidade', text: 'Planejamento de aposentadoria por idade, tempo de contribuição ou especial, pensão por morte aos dependentes e salário-maternidade, inclusive em casos de duplo vínculo (CLT e MEI/autônoma).' },
+      { heading: 'Benefícios por Incapacidade e BPC/LOAS', text: 'Requisitos para concessão e restabelecimento de auxílio-doença, aposentadoria por invalidez e auxílio-acidente, além do BPC/LOAS a idosos e pessoas com deficiência, inclusive após negativa do INSS.' },
+      { heading: 'Isenção de IR por Doença Grave', text: 'Aposentados e pensionistas com doenças graves (Lei nº 7.713/88) podem ter isenção do Imposto de Renda, sem teto de valor, e restituição do que foi descontado nos últimos 5 anos.' },
     ],
   },
 };
@@ -98,12 +101,16 @@ function getAreaData(title: string) {
 
 				<!-- Left: Brand image -->
 				<div class="w-3/5 sm:w-1/2 md:w-2/5 md:flex-[2] flex items-center justify-center">
-					<img
-						src="/brand.webp"
-						alt="Santos & Trevizan — Advocacia e Assessoria"
-						width="381"
-						height="366"
-						class="w-full h-auto object-contain drop-shadow-sm"
+					<Picture
+						src={brandEmblem}
+						formats={['avif', 'webp']}
+						fallbackFormat="webp"
+						widths={[240, 320, 480, 640, 800]}
+						sizes="(min-width: 768px) 320px, (min-width: 640px) 50vw, 60vw"
+						alt="Paloma Santos — Advocacia Especializada"
+						loading="eager"
+						fetchpriority="high"
+						class="w-full max-w-[20rem] h-auto object-contain drop-shadow-lg"
 					/>
 				</div>
 
@@ -113,7 +120,7 @@ function getAreaData(title: string) {
 						Atendimento humanizado e soluções jurídicas eficientes para você e sua família.
 					</h1>
 					<p class="text-base sm:text-lg text-slate-700 leading-relaxed max-w-xl">
-						Assessoria jurídica especializada com atendimento 100% digital e alcance nacional em Direito Trabalhista, Civil e Previdenciário.
+						Advocacia ágil, estratégica e humana, com atendimento 100% digital e alcance nacional em Direito Previdenciário, Trabalhista, Civil, Bancário e Tributário.
 					</p>
 					<div class="w-full pt-2 flex justify-center md:justify-end">
 						<a
@@ -122,12 +129,12 @@ function getAreaData(title: string) {
 							rel="noopener noreferrer"
 							data-analytics-placement="hero"
 							class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] hover:bg-[#20ba56] text-[#1D2A3D] text-lg font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] focus-visible:ring-offset-2"
-							aria-label="Falar com um advogado via WhatsApp"
+							aria-label="Falar com a advogada via WhatsApp"
 						>
 							<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#1D2A3D" class="shrink-0">
 								<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
 							</svg>
-							<span>Falar com um advogado</span>
+							<span>Falar com a advogada</span>
 						</a>
 					</div>
 				</div>
@@ -154,7 +161,7 @@ function getAreaData(title: string) {
 								rel="noopener noreferrer"
 								data-analytics-placement="areas_card"
 								data-analytics-area={areaKey}
-								aria-label={`Consultar advogado especialista em ${area.title} via WhatsApp`}
+								aria-label={`Falar com a advogada sobre ${area.title} via WhatsApp`}
 								class={`group relative bg-[#243350] hover:bg-[#293a5a] border border-[#B8924A]/25 hover:border-[#F0D080]/50 rounded-xl p-5 sm:p-7 flex flex-col min-h-0 md:min-h-[460px] cursor-pointer transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-xl no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] ${idx === 2 ? 'md:col-span-2 md:max-w-md md:mx-auto lg:col-span-1 lg:max-w-none lg:mx-0' : ''}`}
 							>
 								<!-- Golden L-bracket corner accent (overflows top-left) -->
@@ -198,79 +205,108 @@ function getAreaData(title: string) {
 		</div>
 	</section>
 
-	<!-- Sobre Section -->
-	<section id="sobre" class="py-24 bg-slate-50 relative overflow-hidden">
+	<!-- Quem sou eu Section -->
+	<section id="sobre" class="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
 		<!-- Decorative background shape -->
 		<div class="absolute top-0 right-0 w-96 h-96 bg-[#B8924A]/5 rounded-full blur-3xl pointer-events-none"></div>
-		
+
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative">
-			<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-				
-				<!-- Left column: Title & Biography (7/12 cols) -->
+			<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+				<!-- Left column: Portrait (5/12 cols) -->
+				<figure class="lg:col-span-5 flex flex-col items-center">
+					<div class="relative w-64 sm:w-72 lg:w-full lg:max-w-[22rem] aspect-square">
+						<!-- Thin offset ring echoing the golden corner accents -->
+						<div class="absolute -inset-3 rounded-full border border-[#B8924A]/30 pointer-events-none" aria-hidden="true"></div>
+						<!-- Gold gradient frame -->
+						<div class="absolute inset-0 rounded-full p-1.5 bg-gradient-to-br from-[#F0D080] via-[#D4A857] to-[#B8924A] shadow-xl">
+							<div class="h-full rounded-full p-1 bg-slate-50 overflow-hidden">
+								<Picture
+									src={palomaPhoto}
+									formats={['avif', 'webp']}
+						fallbackFormat="webp"
+									widths={[256, 352, 512, 704, 1024]}
+									sizes="(min-width: 1024px) 352px, (min-width: 640px) 288px, 256px"
+									alt="Retrato da advogada Paloma Santos, de blazer azul-marinho e blusa clara, sorrindo de braços cruzados"
+									loading="lazy"
+									decoding="async"
+									pictureAttributes={{ class: 'block w-full h-full' }}
+									class="w-full h-full rounded-full object-cover object-[50%_8%]"
+								/>
+							</div>
+						</div>
+					</div>
+					<figcaption class="mt-8 text-center">
+						<p class="text-xl font-bold" style="color: #1D2A3D; font-family: var(--font-family-serif);">Dra. Paloma Santos</p>
+						<p class="mt-1 text-sm font-semibold uppercase tracking-wider text-[#7D5F23]">Advogada · OAB/SP 490.797</p>
+					</figcaption>
+				</figure>
+
+				<!-- Right column: Title & Biography (7/12 cols) -->
 				<div class="lg:col-span-7 space-y-6">
-					<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight" style="color: #1D2A3D;">
-						Sobre o Escritório
+					<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-center lg:text-left" style="color: #1D2A3D;">
+						Quem sou eu
 					</h2>
-					<div class="space-y-4 text-base md:text-lg leading-relaxed text-slate-600">
+					<div class="space-y-4 text-base md:text-lg leading-relaxed text-slate-600 max-w-[70ch]">
 						<p>
-							<strong>Santos & Trevizan — Advocacia e Assessoria</strong> é um escritório estruturado e conduzido por seus sócios fundadores para prestar serviços jurídicos com ética incondicional, transparência e rigor técnico. A atuação da equipe é pautada pelo atendimento personalizado e humanizado, compreendendo a singularidade de cada caso para apresentar soluções eficazes na resolução de conflitos.
+							Sou <strong>Paloma Santos</strong>, advogada com atuação voltada ao <strong>Direito Previdenciário</strong> e também às áreas Trabalhista, Civil, Bancária e Tributária — sempre com atenção especial a aposentados, pensionistas, trabalhadores e famílias. Acredito em uma advocacia <strong>ágil, estratégica e humana</strong>: acompanho cada caso pessoalmente, com ética, transparência e rigor técnico, para apresentar soluções eficazes.
 						</p>
 						<p>
-							Com sólida experiência prática e constante aprimoramento técnico e jurisprudencial, pautamos nosso trabalho na defesa intransigente dos direitos individuais, construindo teses defensivas sólidas tanto na esfera administrativa quanto judicial.
+							Com sólida experiência prática e constante aprimoramento técnico e jurisprudencial, pauto meu trabalho na defesa intransigente dos direitos individuais, construindo teses sólidas tanto na esfera administrativa quanto na judicial.
 						</p>
 						<p>
-							Com <strong>alcance nacional</strong>, oferecemos atendimento 100% digital — via WhatsApp, videochamada e e-mail —, viabilizando que clientes de qualquer município do Brasil acessem uma assessoria jurídica de alto padrão com agilidade, acolhimento e sem custos de deslocamento.
+							Com <strong>alcance nacional</strong>, ofereço atendimento 100% digital — via WhatsApp, videochamada e e-mail —, para que clientes de qualquer município do Brasil tenham acesso a uma assessoria jurídica de alto padrão, com agilidade, acolhimento e sem custos de deslocamento.
 						</p>
 					</div>
 				</div>
 
-				<!-- Right column: Pillars / Core Values (5/12 cols) -->
-				<div class="lg:col-span-5 bg-white p-5 md:p-8 rounded-2xl shadow-xl border border-slate-100 space-y-6">
-					<h3 class="text-xl font-bold" style="color: #1D2A3D;">Diretrizes de Atuação</h3>
-					
-					<div class="space-y-4">
-						<div class="flex items-start gap-4">
-							<div class="p-3 bg-[#B8924A]/10 rounded-xl text-[#B8924A] shrink-0">
-								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-									<circle cx="12" cy="12" r="10"/>
-									<path d="m9 12 2 2 4-4"/>
-								</svg>
-							</div>
-							<div>
-								<h4 class="font-bold text-base text-slate-800">Compromisso Ético</h4>
-								<p class="text-sm text-slate-600">Atuação pautada pela transparência absoluta e sigilo profissional em todas as etapas da assessoria.</p>
-							</div>
+			</div>
+
+			<!-- Pillars / Core Values (full width) -->
+			<div class="mt-16 bg-white p-5 md:p-8 rounded-2xl shadow-xl border border-slate-100">
+				<h3 class="text-xl font-bold mb-6" style="color: #1D2A3D;">Diretrizes de Atuação</h3>
+
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+					<div class="flex items-start gap-4">
+						<div class="p-3 bg-[#B8924A]/10 rounded-xl text-[#B8924A] shrink-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<circle cx="12" cy="12" r="10"/>
+								<path d="m9 12 2 2 4-4"/>
+							</svg>
 						</div>
-						
-						<div class="flex items-start gap-4">
-							<div class="p-3 bg-[#B8924A]/10 rounded-xl text-[#B8924A] shrink-0">
-								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-									<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-									<circle cx="9" cy="7" r="4"/>
-									<path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-									<path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-								</svg>
-							</div>
-							<div>
-								<h4 class="font-bold text-base text-slate-800">Atendimento Humanizado</h4>
-								<p class="text-sm text-slate-600">Escuta ativa para acolher as dores do cliente, explicando os termos jurídicos de forma simples e acessível.</p>
-							</div>
+						<div>
+							<h4 class="font-bold text-base text-slate-800">Compromisso Ético</h4>
+							<p class="text-sm text-slate-600">Atuação pautada pela transparência absoluta e sigilo profissional em todas as etapas da assessoria.</p>
 						</div>
-						
-						<div class="flex items-start gap-4">
-							<div class="p-3 bg-[#B8924A]/10 rounded-xl text-[#B8924A] shrink-0">
-								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-									<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-								</svg>
-							</div>
-							<div>
-								<h4 class="font-bold text-base text-slate-800">Rigor Técnico</h4>
-								<p class="text-sm text-slate-600">Estudo aprofundado da jurisprudência e doutrina para construir teses defensivas sólidas e seguras.</p>
-							</div>
+					</div>
+
+					<div class="flex items-start gap-4">
+						<div class="p-3 bg-[#B8924A]/10 rounded-xl text-[#B8924A] shrink-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+								<circle cx="9" cy="7" r="4"/>
+								<path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+								<path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+							</svg>
+						</div>
+						<div>
+							<h4 class="font-bold text-base text-slate-800">Atendimento Humanizado</h4>
+							<p class="text-sm text-slate-600">Escuta ativa para acolher as dores do cliente, explicando os termos jurídicos de forma simples e acessível.</p>
+						</div>
+					</div>
+
+					<div class="flex items-start gap-4">
+						<div class="p-3 bg-[#B8924A]/10 rounded-xl text-[#B8924A] shrink-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+							</svg>
+						</div>
+						<div>
+							<h4 class="font-bold text-base text-slate-800">Rigor Técnico</h4>
+							<p class="text-sm text-slate-600">Estudo aprofundado da jurisprudência e doutrina para construir teses sólidas e seguras.</p>
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</section>

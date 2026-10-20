@@ -11,7 +11,7 @@ export const author = defineType({
 			name: "name",
 			title: "Nome Completo",
 			type: "string",
-			description: "Nome do advogado ou membro do escritório.",
+			description: "Nome da advogada (ex: Dra. Paloma Santos).",
 			placeholder: "Ex: Dra. Paloma Santos",
 			validation: (Rule) => Rule.required().error("O nome é obrigatório."),
 		}),
@@ -39,6 +39,13 @@ export const author = defineType({
 			type: "string",
 			description: "Cargo ou área de especialização.",
 			placeholder: "Ex: Advogada — Especialista em Direito Trabalhista",
+		}),
+		defineField({
+			name: "oab",
+			title: "Inscrição OAB",
+			type: "string",
+			description: "Exibida no card de autora ao final dos artigos.",
+			placeholder: "Ex: OAB/SP 490.797",
 		}),
 		defineField({
 			name: "bio",

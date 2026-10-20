@@ -147,8 +147,8 @@ export const blockContent = defineType({
 					name: "description",
 					title: "Descrição Breve",
 					type: "string",
-					placeholder: "Ex: Nossa equipe pode analisar seu caso diretamente pelo WhatsApp.",
-					initialValue: "Fale com nossa equipe diretamente pelo WhatsApp para avaliar o seu caso.",
+					placeholder: "Ex: Posso analisar seu caso diretamente pelo WhatsApp.",
+					initialValue: "Fale comigo diretamente pelo WhatsApp para avaliar o seu caso.",
 				},
 				{
 					name: "buttonText",

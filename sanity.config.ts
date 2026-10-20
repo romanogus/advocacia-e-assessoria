@@ -46,8 +46,8 @@ const santosTrevizanTheme = buildLegacyTheme({
 // ─── Studio Config ───────────────────────────────────────────────
 export default defineConfig({
 	name: "santos-trevizan",
-	title: "Santos & Trevizan",
-	subtitle: "Advocacia e Assessoria",
+	title: "Paloma Santos",
+	subtitle: "Advocacia Especializada",
 
 	projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
 	dataset: import.meta.env.PUBLIC_SANITY_DATASET,
