@@ -5,6 +5,9 @@ interface Props {
   buttonText?: string;
   whatsappMessage?: string;
   articleTitle?: string;
+  /** data-analytics-placement / data-analytics-area for the lead tracker in Layout.astro. */
+  placement?: string;
+  area?: string;
 }
 
 const {
@@ -13,6 +16,8 @@ const {
   buttonText = "Falar com Advogada no WhatsApp",
   whatsappMessage,
   articleTitle,
+  placement = "blog_cta",
+  area,
 } = Astro.props;
 
 const phone = "5511955304453";
@@ -48,7 +53,8 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(finalMessa
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        data-analytics-placement="blog_cta"
+        data-analytics-placement={placement}
+        data-analytics-area={area}
         aria-label={buttonText}
         class="inline-flex items-center justify-center gap-3 w-full md:w-auto px-6 py-4 rounded-xl bg-[#25D366] hover:bg-[#20ba56] text-[#1D2A3D] font-bold text-base shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-[1.02] no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1D2A3D]"
         style="color: #1D2A3D !important; text-decoration: none !important;"

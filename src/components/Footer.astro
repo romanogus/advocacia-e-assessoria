@@ -1,10 +1,19 @@
 ---
 import InstagramLink from './InstagramLink.astro';
+import { sanityClient } from 'sanity:client';
+import { AREAS_QUERY, resolveArea, type Area } from '../lib/areas';
 
 const whatsappPhone = "5511955304453";
 const whatsappMessage = "Olá! Gostaria de mais informações sobre os serviços jurídicos.";
 const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(whatsappMessage)}`;
 const currentYear = new Date().getFullYear();
+
+// Links to the area landing pages. The footer also renders on server-rendered blog pages,
+// so a Sanity outage only hides this list instead of failing the page.
+let areas: Area[] = [];
+try {
+  areas = (await sanityClient.fetch(AREAS_QUERY)).map(resolveArea);
+} catch {}
 // 44px-tall tap targets for the small legal links in the bottom bar.
 const legalLink = "inline-flex items-center min-h-11 px-2 text-sm text-slate-400 hover:text-[#F0D080] transition-colors underline underline-offset-4 decoration-slate-600 hover:decoration-[#F0D080] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] rounded";
 ---
@@ -53,6 +62,20 @@ const legalLink = "inline-flex items-center min-h-11 px-2 text-sm text-slate-400
             <span>São Paulo, SP — Atendimento Nacional 100% Digital</span>
           </p>
         </div>
+        {areas.length > 0 && (
+          <nav aria-labelledby="footer-areas-title" class="mt-8">
+            <p id="footer-areas-title" class="font-medium text-white">Áreas de atuação</p>
+            <ul class="mt-1 flex flex-wrap gap-x-4 -mx-2">
+              {areas.map((area) => (
+                <li>
+                  <a href={`/areas/${area.slug}`} class="inline-flex items-center min-h-11 px-2 text-slate-300 hover:text-[#F0D080] transition-colors underline underline-offset-4 decoration-slate-600 hover:decoration-[#F0D080] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] rounded">
+                    {area.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
       </div>
       <div class="bg-[#243350] p-8 rounded-xl border border-[#B8924A]/25 flex flex-col justify-between">
         <div>

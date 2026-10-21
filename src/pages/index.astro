@@ -8,90 +8,12 @@ import brandEmblem from '../assets/brand-emblem.webp';
 import InstagramLink from '../components/InstagramLink.astro';
 
 import { sanityClient } from 'sanity:client';
+import { AREAS_QUERY, resolveArea, whatsappUrl as buildWhatsAppUrl, type Area } from '../lib/areas';
 
-const whatsappPhone = "5511955304453";
 const whatsappMessage = "Olá! Gostaria de mais informações sobre os serviços jurídicos.";
-const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(whatsappMessage)}`;
+const whatsappUrl = buildWhatsAppUrl(whatsappMessage);
 
-function getAreaWhatsAppUrl(title: string) {
-  const lower = title?.toLowerCase() ?? '';
-  let msg = "Olá! Gostaria de mais informações sobre os serviços jurídicos.";
-  
-  if (lower.includes('trabalhist')) {
-    msg = "Olá! Gostaria de tirar dúvidas sobre Direito Trabalhista (rescisão, horas extras, direitos trabalhistas). Poderia me ajudar?";
-  } else if (lower.includes('civil')) {
-    msg = "Olá! Gostaria de tirar dúvidas sobre Direito Civil (contratos, consumidor, empréstimos e descontos bancários, família, sucessões). Poderia me ajudar?";
-  } else if (lower.includes('previdenci')) {
-    msg = "Olá! Gostaria de tirar dúvidas sobre Direito Previdenciário (aposentadoria, benefícios, BPC/LOAS, isenção de Imposto de Renda). Poderia me ajudar?";
-  }
-  
-  return `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(msg)}`;
-}
-
-const areas = await sanityClient.fetch(
-  `*[_type == "areaDeAtuacao"] | order(order asc) {
-    _id,
-    title,
-    description,
-    icon,
-    order
-  }`
-);
-
-const areaData: Record<string, {
-  icon: string;
-  sections: { heading: string; text: string }[];
-}> = {
-  trabalhist: {
-    icon: `<svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#B8924A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="8" y="18" width="32" height="22" rx="3"/>
-      <path d="M18 18v-4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/>
-      <line x1="8" y1="28" x2="40" y2="28"/>
-      <rect x="20" y="25" width="8" height="6" rx="1.5"/>
-    </svg>`,
-    sections: [
-      { heading: 'Rescisão Contratual', text: 'Orientação informativa sobre modalidades de demissão (sem justa causa, por justa causa, rescisão indireta) e o correto cálculo das verbas rescisórias previstas na CLT.' },
-      { heading: 'Jornada de Trabalho e Horas Extras', text: 'Esclarecimentos sobre os limites de jornada, banco de horas, adicional noturno, intervalos obrigatórios para repouso e alimentação, e o cálculo de horas extraordinárias.' },
-      { heading: 'Direitos e Adicionais', text: 'Informações sobre o recolhimento do FGTS, férias, décimo terceiro salário, além de adicionais de insalubridade, periculosidade e respeito às convenções coletivas.' },
-    ],
-  },
-  civil: {
-    icon: `<svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#B8924A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="24" y1="9" x2="24" y2="42"/>
-      <line x1="15" y1="42" x2="33" y2="42"/>
-      <line x1="7" y1="17" x2="41" y2="17"/>
-      <line x1="11" y1="17" x2="11" y2="27"/>
-      <path d="M6 27 Q11 32 16 27"/>
-      <line x1="37" y1="17" x2="37" y2="27"/>
-      <path d="M32 27 Q37 32 42 27"/>
-    </svg>`,
-    sections: [
-      { heading: 'Análise e Elaboração de Contratos', text: 'Assessoria jurídica na elaboração, revisão e distrato de instrumentos particulares para conferir segurança e mitigar riscos em relações negociais.' },
-      { heading: 'Direito do Consumidor e Bancário', text: 'Defesa do consumidor contra cobranças indevidas e práticas abusivas, incluindo superendividamento e descontos excessivos de empréstimos consignados e cartões RMC/RCC, com base na proteção do mínimo existencial.' },
-      { heading: 'Família e Planejamento Sucessório', text: 'Informações sobre divórcio consensual e litigioso, fixação de pensão alimentícia, termos de guarda de menores, partilha de bens e inventários judiciais ou extrajudiciais.' },
-    ],
-  },
-  previdenci: {
-    icon: `<svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="#B8924A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M24 6 L38 11 L38 24 Q38 35 24 42 Q10 35 10 24 L10 11 Z"/>
-      <circle cx="24" cy="21" r="5"/>
-      <path d="M15 36 Q15 30 24 30 Q33 30 33 36"/>
-    </svg>`,
-    sections: [
-      { heading: 'Aposentadorias, Pensão e Salário-Maternidade', text: 'Planejamento de aposentadoria por idade, tempo de contribuição ou especial, pensão por morte aos dependentes e salário-maternidade, inclusive em casos de duplo vínculo (CLT e MEI/autônoma).' },
-      { heading: 'Benefícios por Incapacidade e BPC/LOAS', text: 'Requisitos para concessão e restabelecimento de auxílio-doença, aposentadoria por invalidez e auxílio-acidente, além do BPC/LOAS a idosos e pessoas com deficiência, inclusive após negativa do INSS.' },
-      { heading: 'Isenção de IR por Doença Grave', text: 'Aposentados e pensionistas com doenças graves (Lei nº 7.713/88) podem ter isenção do Imposto de Renda, sem teto de valor, e restituição do que foi descontado nos últimos 5 anos.' },
-    ],
-  },
-};
-
-function getAreaData(title: string) {
-  const lower = title?.toLowerCase() ?? '';
-  for (const [keyword, data] of Object.entries(areaData)) {
-    if (lower.includes(keyword)) return data;
-  }
-  return null;
-}
+const areas: Area[] = (await sanityClient.fetch(AREAS_QUERY)).map(resolveArea);
 ---
 
 <Layout>
@@ -152,17 +74,14 @@ function getAreaData(title: string) {
 				<p class="text-slate-300">Nenhuma área de atuação cadastrada.</p>
 			) : (
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{areas.map((area: any, idx: number) => {
-						const data = getAreaData(area.title);
-						const areaKey = area.title?.toLowerCase().includes('trabalhist') ? 'trabalhista' : area.title?.toLowerCase().includes('civil') ? 'civil' : area.title?.toLowerCase().includes('previdenci') ? 'previdenciario' : area.title;
-						return (
+					{areas.map((area, idx) => (
 							<a
-								id={areaKey}
-								href={getAreaWhatsAppUrl(area.title)}
+								id={area.key}
+								href={buildWhatsAppUrl(area.whatsappMessage)}
 								target="_blank"
 								rel="noopener noreferrer"
 								data-analytics-placement="areas_card"
-								data-analytics-area={areaKey}
+								data-analytics-area={area.key}
 								aria-label={`Falar com a advogada sobre ${area.title} via WhatsApp`}
 								class={`group relative scroll-mt-24 bg-[#243350] hover:bg-[#293a5a] border border-[#B8924A]/25 hover:border-[#F0D080]/50 rounded-xl p-5 sm:p-7 flex flex-col min-h-0 md:min-h-[460px] cursor-pointer transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-xl no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] ${idx === 2 ? 'md:col-span-2 md:max-w-md md:mx-auto lg:col-span-1 lg:max-w-none lg:mx-0' : ''}`}
 							>
@@ -176,19 +95,19 @@ function getAreaData(title: string) {
 
 								<!-- Header: icon + title -->
 								<div class="flex items-center gap-4 mb-6">
-									{data && <div set:html={data.icon} class="shrink-0" />}
+									{area.icon && <div set:html={area.icon} class="shrink-0" />}
 									<h3 class="text-xl font-semibold text-white leading-tight">{area.title}</h3>
 								</div>
 
 								<!-- 3 content sections -->
 								<div class="flex flex-col gap-0 flex-1">
-									{data?.sections.map((section, i) => (
+									{area.services.map((section, i) => (
 										<div class={i > 0 ? 'border-t border-slate-700/60 pt-4 mt-4' : ''}>
 											<h4 class="text-lg font-semibold mb-1" style="color: #D4A857;">{section.heading}</h4>
 											<p class="text-slate-300 text-base leading-relaxed">{section.text}</p>
 										</div>
 									))}
-									{!data && <p class="text-slate-300">{area.description}</p>}
+									{area.services.length === 0 && <p class="text-slate-300">{area.description}</p>}
 								</div>
 
 								<!-- CTA Indicator Button -->
@@ -200,8 +119,7 @@ function getAreaData(title: string) {
 									</svg>
 								</div>
 							</a>
-						);
-					})}
+						))}
 				</div>
 			)}
 		</div>
