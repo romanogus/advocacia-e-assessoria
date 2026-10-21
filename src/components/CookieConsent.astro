@@ -1,0 +1,190 @@
+---
+// Cookie consent banner for Google Consent Mode v2. Layout.astro sets the "denied" defaults
+// and restores a saved choice; this banner collects the choice and sends the update.
+// Rendered first in <body> so keyboard and screen-reader users meet it before the page, without stealing focus.
+// Reopened by any element with [data-cookie-preferences] (footer link, privacy policy §7).
+const onPolicyPage = Astro.url.pathname.replace(/\/$/, '') === '/politica-de-privacidade';
+
+const linkClass = "relative cursor-pointer font-semibold text-[#7D5F23] underline underline-offset-4 decoration-[#B8924A]/60 hover:text-[#1D2A3D] hover:decoration-[#1D2A3D] transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7D5F23] after:absolute after:-inset-x-1 after:-inset-y-3 after:content-['']";
+const buttonBase = "min-h-12 px-4 rounded-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] focus-visible:ring-offset-2";
+---
+
+<section
+  id="cookie-consent"
+  aria-labelledby="cookie-consent-title"
+  class="fixed z-[60] inset-x-0 bottom-0 md:inset-x-auto md:left-6 md:bottom-6 md:w-[26rem]"
+  hidden
+>
+  <div
+    data-consent-card
+    class="relative max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain bg-white text-base leading-normal md:leading-relaxed text-slate-600 rounded-t-xl md:rounded-xl shadow-[0_-8px_24px_-8px_rgb(0_0_0/0.18)] md:shadow-[0_10px_25px_-5px_rgb(0_0_0/0.15)] px-4 pt-5 pb-[max(1rem,env(safe-area-inset-bottom))] md:p-6"
+  >
+    <!-- Same gold rule that closes the hero -->
+    <div class="absolute inset-x-0 top-0 h-1 rounded-t-xl bg-gradient-to-r from-[#B8924A] via-[#D4A857] to-[#F0D080]" aria-hidden="true"></div>
+
+    <button
+      type="button"
+      data-consent="close"
+      hidden
+      aria-label="Fechar sem alterar"
+      class="absolute top-2 right-2 inline-flex size-11 items-center justify-center rounded-lg text-slate-500 hover:text-[#1D2A3D] hover:bg-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A]"
+    >
+      <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+
+    <h2 id="cookie-consent-title" class="sr-only md:not-sr-only md:mb-2 md:pr-10 font-serif text-lg font-semibold leading-snug text-[#1D2A3D]">
+      Seu caso não passa pelos cookies
+    </h2>
+    <p>
+      Usamos cookies só para contar visitas e medir nossos anúncios. O que você nos conta segue protegido pelo sigilo profissional.
+      <button type="button" data-consent="customize" aria-controls="cookie-consent-options" aria-expanded="false" class={linkClass}>Personalizar</button>{!onPolicyPage && (
+        <> · <a href="/politica-de-privacidade" class={linkClass}>Política de Privacidade</a></>
+      )}
+    </p>
+
+    <fieldset id="cookie-consent-options" class="mt-4 border-t border-slate-200 pt-2" hidden>
+      <legend class="sr-only">Escolha quais cookies permitir</legend>
+      <label class="flex items-start gap-3 py-2">
+        <input type="checkbox" checked disabled class="mt-1 size-5 shrink-0 accent-[#1D2A3D]" />
+        <span><span class="font-semibold text-[#1D2A3D]">Essenciais</span> — guardam esta escolha. Sempre ativos.</span>
+      </label>
+      <label class="flex items-start gap-3 py-2 cursor-pointer">
+        <input type="checkbox" name="analytics" class="mt-1 size-5 shrink-0 cursor-pointer accent-[#1D2A3D]" />
+        <span><span class="font-semibold text-[#1D2A3D]">Estatísticas</span> — contam visitas e cliques nos botões de contato, sem identificar você.</span>
+      </label>
+      <label class="flex items-start gap-3 py-2 cursor-pointer">
+        <input type="checkbox" name="ads" class="mt-1 size-5 shrink-0 cursor-pointer accent-[#1D2A3D]" />
+        <span><span class="font-semibold text-[#1D2A3D]">Anúncios</span> — mostram quantos contatos vieram de cada anúncio no Google.</span>
+      </label>
+    </fieldset>
+
+    <div class="mt-4 grid grid-cols-2 gap-3">
+      <button type="button" data-consent="reject" class={`${buttonBase} border border-[#1D2A3D] text-[#1D2A3D] hover:bg-slate-50`}>Recusar</button>
+      <button type="button" data-consent="accept" class={`${buttonBase} bg-[#1D2A3D] hover:bg-[#243350] text-white`}>Aceitar</button>
+      <button type="button" data-consent="save" hidden class={`${buttonBase} bg-[#1D2A3D] hover:bg-[#243350] text-white`}>Salvar escolhas</button>
+    </div>
+  </div>
+</section>
+
+<p id="cookie-consent-status" class="sr-only" role="status" aria-live="polite"></p>
+
+<script>
+  type Choice = { analytics: boolean; ads: boolean };
+
+  const STORAGE_KEY = 'cookie-consent';
+  const banner = document.getElementById('cookie-consent')!;
+  const card = banner.querySelector<HTMLElement>('[data-consent-card]')!;
+  const status = document.getElementById('cookie-consent-status')!;
+  const options = document.getElementById('cookie-consent-options') as HTMLFieldSetElement;
+  const analyticsBox = options.querySelector<HTMLInputElement>('input[name="analytics"]')!;
+  const adsBox = options.querySelector<HTMLInputElement>('input[name="ads"]')!;
+  const button = (name: string) => banner.querySelector<HTMLButtonElement>(`[data-consent="${name}"]`)!;
+  const [customizeBtn, acceptBtn, saveBtn, closeBtn] = ['customize', 'accept', 'save', 'close'].map(button);
+
+  // Kept in memory too, so a browser that blocks localStorage is not asked again on this page.
+  let memoryChoice: Choice | null = null;
+  // The control that reopened the banner; focus returns there when it closes.
+  let opener: HTMLElement | null = null;
+
+  const w = window as unknown as { dataLayer: unknown[] };
+  w.dataLayer = w.dataLayer || [];
+  // gtag commands must be pushed as an Arguments object, not an array.
+  function gtag(..._args: unknown[]) {
+    // eslint-disable-next-line prefer-rest-params
+    w.dataLayer.push(arguments);
+  }
+
+  function readChoice(): Choice | null {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null');
+      if (saved?.v === 1) return { analytics: !!saved.analytics, ads: !!saved.ads };
+    } catch {}
+    return memoryChoice;
+  }
+
+  function applyChoice(choice: Choice) {
+    memoryChoice = choice;
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ v: 1, ...choice, ts: new Date().toISOString() }));
+    } catch {}
+    const ads = choice.ads ? 'granted' : 'denied';
+    gtag('consent', 'update', {
+      ad_storage: ads,
+      ad_user_data: ads,
+      ad_personalization: ads,
+      analytics_storage: choice.analytics ? 'granted' : 'denied',
+    });
+    w.dataLayer.push({ event: 'cookie_consent_update', consent_analytics: choice.analytics, consent_ads: choice.ads });
+    status.textContent = 'Preferências de cookies salvas.';
+    hide();
+  }
+
+  function setCustomizing(on: boolean) {
+    options.hidden = !on;
+    saveBtn.hidden = !on;
+    acceptBtn.hidden = on;
+    customizeBtn.setAttribute('aria-expanded', String(on));
+  }
+
+  // Lifts the floating WhatsApp button above the banner on phones (see WhatsAppButton.astro).
+  const offsetObserver = new ResizeObserver(() => {
+    document.documentElement.style.setProperty('--consent-offset', `${banner.hidden ? 0 : card.offsetHeight}px`);
+  });
+
+  function show(reopenedBy: HTMLElement | null) {
+    const choice = readChoice();
+    analyticsBox.checked = choice?.analytics ?? false;
+    adsBox.checked = choice?.ads ?? false;
+    opener = reopenedBy;
+    closeBtn.hidden = !reopenedBy;
+    setCustomizing(!!reopenedBy);
+    status.textContent = '';
+    banner.hidden = false;
+    offsetObserver.observe(card);
+  }
+
+  function hide() {
+    const hadFocus = banner.contains(document.activeElement);
+    banner.hidden = true;
+    offsetObserver.disconnect();
+    document.documentElement.style.setProperty('--consent-offset', '0px');
+    if (!hadFocus) return;
+    if (opener?.isConnected) {
+      opener.focus();
+    } else {
+      const main = document.querySelector('main');
+      main?.setAttribute('tabindex', '-1');
+      main?.focus({ preventScroll: true });
+    }
+  }
+
+  banner.addEventListener('click', (e) => {
+    const action = (e.target as HTMLElement).closest<HTMLElement>('[data-consent]')?.dataset.consent;
+    if (action === 'accept') applyChoice({ analytics: true, ads: true });
+    else if (action === 'reject') applyChoice({ analytics: false, ads: false });
+    else if (action === 'save') applyChoice({ analytics: analyticsBox.checked, ads: adsBox.checked });
+    else if (action === 'close') hide();
+    else if (action === 'customize') {
+      const on = options.hidden;
+      setCustomizing(on);
+      if (on) analyticsBox.focus();
+    }
+  });
+
+  // Esc closes a reopened banner without changing the saved choice; the first-visit banner waits for a decision.
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !banner.hidden && opener) hide();
+  });
+
+  document.addEventListener('click', (e) => {
+    const trigger = (e.target as HTMLElement).closest<HTMLElement>('[data-cookie-preferences]');
+    if (!trigger) return;
+    e.preventDefault();
+    show(trigger);
+    analyticsBox.focus();
+  });
+
+  if (!readChoice()) show(null);
+</script>

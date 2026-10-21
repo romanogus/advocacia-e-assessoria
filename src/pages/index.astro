@@ -95,7 +95,7 @@ function getAreaData(title: string) {
 ---
 
 <Layout>
-	<section id="hero" class="min-h-[calc(75vh-4rem)] bg-[#D9D8D3] flex items-center relative overflow-hidden">
+	<section id="hero" class="min-h-[calc(75vh-4rem)] bg-slate-50 flex items-center relative overflow-hidden">
 		<div class="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-r from-[#B8924A] via-[#D4A857] to-[#F0D080]"></div>
 		<div class="max-w-7xl mx-auto px-4 md:px-6 py-8 sm:py-12 md:py-16 w-full">
 			<div class="flex flex-col md:flex-row items-center gap-6 md:gap-10">
@@ -121,7 +121,7 @@ function getAreaData(title: string) {
 						Atendimento humanizado e soluções jurídicas eficientes para você e sua família.
 					</h1>
 					<p class="text-base sm:text-lg text-slate-700 leading-relaxed max-w-xl">
-						Advocacia ágil, estratégica e humana, com atendimento 100% digital e alcance nacional em Direito Previdenciário, Trabalhista, Civil, Bancário e Tributário.
+						Advocacia ágil, estratégica e humana, com atendimento 100% digital e alcance nacional em Direito Previdenciário, Trabalhista e Civil.
 					</p>
 					<div class="w-full pt-2 flex justify-center md:justify-end">
 						<a
@@ -157,13 +157,14 @@ function getAreaData(title: string) {
 						const areaKey = area.title?.toLowerCase().includes('trabalhist') ? 'trabalhista' : area.title?.toLowerCase().includes('civil') ? 'civil' : area.title?.toLowerCase().includes('previdenci') ? 'previdenciario' : area.title;
 						return (
 							<a
+								id={areaKey}
 								href={getAreaWhatsAppUrl(area.title)}
 								target="_blank"
 								rel="noopener noreferrer"
 								data-analytics-placement="areas_card"
 								data-analytics-area={areaKey}
 								aria-label={`Falar com a advogada sobre ${area.title} via WhatsApp`}
-								class={`group relative bg-[#243350] hover:bg-[#293a5a] border border-[#B8924A]/25 hover:border-[#F0D080]/50 rounded-xl p-5 sm:p-7 flex flex-col min-h-0 md:min-h-[460px] cursor-pointer transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-xl no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] ${idx === 2 ? 'md:col-span-2 md:max-w-md md:mx-auto lg:col-span-1 lg:max-w-none lg:mx-0' : ''}`}
+								class={`group relative scroll-mt-24 bg-[#243350] hover:bg-[#293a5a] border border-[#B8924A]/25 hover:border-[#F0D080]/50 rounded-xl p-5 sm:p-7 flex flex-col min-h-0 md:min-h-[460px] cursor-pointer transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:shadow-xl no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8924A] ${idx === 2 ? 'md:col-span-2 md:max-w-md md:mx-auto lg:col-span-1 lg:max-w-none lg:mx-0' : ''}`}
 							>
 								<!-- Golden L-bracket corner accent (overflows top-left) -->
 								<div class="absolute" style="top: -12px; left: -12px; width: 36px; height: 36px; pointer-events: none;">
@@ -251,13 +252,13 @@ function getAreaData(title: string) {
 					</h2>
 					<div class="space-y-4 text-base md:text-lg leading-relaxed text-slate-600 max-w-[70ch]">
 						<p>
-							Sou <strong>Paloma Santos</strong>, advogada com atuação voltada ao <strong>Direito Previdenciário</strong> e também às áreas Trabalhista, Civil, Bancária e Tributária — sempre com atenção especial a aposentados, pensionistas, trabalhadores e famílias. Acredito em uma advocacia <strong>ágil, estratégica e humana</strong>: acompanho cada caso pessoalmente, com ética, transparência e rigor técnico, para apresentar soluções eficazes.
+							Sou <strong>Paloma Santos</strong>, advogada dedicada à proteção de aposentados, pensionistas e trabalhadores. Desde 2020, construo uma advocacia que une <strong>agilidade, transparência</strong> e, acima de tudo, <strong>resultados</strong>.
 						</p>
 						<p>
-							Com sólida experiência prática e constante aprimoramento técnico e jurisprudencial, pauto meu trabalho na defesa intransigente dos direitos individuais, construindo teses sólidas tanto na esfera administrativa quanto na judicial.
+							Com foco central em <strong>Direito Previdenciário</strong> e especialização em benefícios por incapacidade, invisto constantemente em certificações e aprimoramento. Minha grande força na profissão é a precisão técnica: sou especialista em criar teses sólidas e argumentos jurídicos incontestáveis, estruturando cada caso — seja administrativo ou judicial — para vencer. Também estendo esse mesmo rigor às áreas Trabalhista e Civil.
 						</p>
 						<p>
-							Com <strong>alcance nacional</strong>, ofereço atendimento 100% digital — via WhatsApp, videochamada e e-mail —, para que clientes de qualquer município do Brasil tenham acesso a uma assessoria jurídica de alto padrão, com agilidade, acolhimento e sem custos de deslocamento.
+							Entendo que o seu tempo e conforto são valiosos. Por isso, ofereço uma assessoria jurídica de alto padrão <strong>100% digital</strong> para qualquer município do Brasil. Pelo WhatsApp ou videochamada, acompanho seu caso pessoalmente, com o acolhimento que você merece e a estratégia que você precisa.
 						</p>
 						<p>
 							Prefere conversar?
@@ -266,8 +267,8 @@ function getAreaData(title: string) {
 								target="_blank"
 								rel="noopener noreferrer"
 								data-analytics-placement="sobre"
-								class="relative whitespace-nowrap font-semibold text-[#7D5F23] underline decoration-[#B8924A]/60 underline-offset-4 hover:text-[#1D2A3D] hover:decoration-[#1D2A3D] transition-colors rounded focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#7D5F23] focus-visible:ring-offset-2 after:absolute after:-inset-x-2 after:-inset-y-3 after:content-['']"
-							>Fale comigo pelo WhatsApp<span class="sr-only"> (abre em nova aba)</span></a>
+								class="relative block w-fit mt-2 whitespace-nowrap font-semibold text-[#7D5F23] underline decoration-[#B8924A]/60 underline-offset-4 hover:text-[#1D2A3D] hover:decoration-[#1D2A3D] transition-colors rounded focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#7D5F23] focus-visible:ring-offset-2 after:absolute after:-inset-x-2 after:-inset-y-3 after:content-['']"
+							>Falar no WhatsApp<span class="sr-only"> (abre em nova aba)</span></a>
 						</p>
 					</div>
 				</div>

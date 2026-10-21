@@ -2,6 +2,7 @@
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 import '../styles/global.css';
 import Analytics from '@vercel/analytics/astro';
 
@@ -83,6 +84,38 @@ const ogImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsW
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImageUrl} />
+
+		<!-- Google Consent Mode v2: deny by default, restore a saved choice before any Google tag loads (see CookieConsent.astro) -->
+		<script is:inline set:html={`
+			(function() {
+				window.dataLayer = window.dataLayer || [];
+				// Local on purpose: exposing window.gtag would make the lead tracker below double-send events through GTM.
+				function gtag(){ window.dataLayer.push(arguments); }
+				gtag('consent', 'default', {
+					ad_storage: 'denied',
+					ad_user_data: 'denied',
+					ad_personalization: 'denied',
+					analytics_storage: 'denied',
+					functionality_storage: 'granted',
+					security_storage: 'granted',
+					wait_for_update: 500
+				});
+				gtag('set', 'ads_data_redaction', true);
+				gtag('set', 'url_passthrough', true);
+				try {
+					var saved = JSON.parse(localStorage.getItem('cookie-consent'));
+					if (saved && saved.v === 1) {
+						var ads = saved.ads ? 'granted' : 'denied';
+						gtag('consent', 'update', {
+							ad_storage: ads,
+							ad_user_data: ads,
+							ad_personalization: ads,
+							analytics_storage: saved.analytics ? 'granted' : 'denied'
+						});
+					}
+				} catch (e) {}
+			})();
+		`} />
 
 		{gtmId && (
 			<!-- Google Tag Manager -->
@@ -206,8 +239,9 @@ const ogImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsW
 			height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<!-- End Google Tag Manager (noscript) -->
 		)}
+		<CookieConsent />
 		<Navbar />
-		<main class="pt-16 min-h-screen flex-1">
+		<main class="pt-16 min-h-screen flex-1 outline-none">
 			<slot />
 		</main>
 		{!hideFooter && <Footer />}

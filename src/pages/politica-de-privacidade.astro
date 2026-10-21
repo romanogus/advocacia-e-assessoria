@@ -1,0 +1,302 @@
+---
+export const prerender = true;
+
+import LegalPage from '../layouts/LegalPage.astro';
+
+const contactEmail = 'advogada.palomasantos@gmail.com';
+
+const sections = [
+  { id: 'controladora', title: '1. Quem é a controladora' },
+  { id: 'dados-coletados', title: '2. Dados coletados' },
+  { id: 'finalidades', title: '3. Usos e bases legais' },
+  { id: 'sigilo', title: '4. Sigilo profissional' },
+  { id: 'compartilhamento', title: '5. Compartilhamento' },
+  { id: 'transferencia-internacional', title: '6. Transferência internacional' },
+  { id: 'cookies', title: '7. Cookies' },
+  { id: 'retencao', title: '8. Por quanto tempo' },
+  { id: 'direitos', title: '9. Seus direitos' },
+  { id: 'criancas', title: '10. Crianças e adolescentes' },
+  { id: 'seguranca', title: '11. Segurança' },
+  { id: 'alteracoes', title: '12. Alterações' },
+];
+
+const summaryLink = "font-semibold text-[#7D5F23] underline underline-offset-4 decoration-[#B8924A]/60 hover:text-[#1D2A3D] rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7D5F23]";
+---
+
+<LegalPage
+  title="Política de Privacidade"
+  description="Como Paloma Santos — Advocacia Especializada (OAB/SP 490.797) coleta, usa, protege e compartilha dados pessoais, em conformidade com a LGPD (Lei nº 13.709/2018)."
+  updatedAt="21 de outubro de 2026"
+  sections={sections}
+>
+  <section aria-labelledby="resumo" class="not-prose mb-10 rounded-xl bg-slate-50 p-5 sm:p-6 text-base leading-relaxed text-slate-600">
+    <h2 id="resumo" class="font-serif text-xl font-semibold text-[#1D2A3D] scroll-mt-24">Em resumo</h2>
+    <ul class="mt-3 space-y-3">
+      <li class="flex gap-3"><span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-[#B8924A]" aria-hidden="true"></span><span>Seus dados não são vendidos e só são usados para atender você.</span></li>
+      <li class="flex gap-3"><span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-[#B8924A]" aria-hidden="true"></span><span>Tudo o que você conta sobre o seu caso fica protegido pelo <a href="#sigilo" class={summaryLink}>sigilo profissional</a>, mesmo que não haja contratação.</span></li>
+      <li class="flex gap-3"><span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-[#B8924A]" aria-hidden="true"></span><span>Cookies de estatísticas e de anúncios são opcionais e só funcionam se você permitir. <button type="button" data-cookie-preferences class={`${summaryLink} cursor-pointer`}>Rever minha escolha</button></span></li>
+      <li class="flex gap-3"><span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-[#B8924A]" aria-hidden="true"></span><span>Você pode pedir acesso, correção ou exclusão dos seus dados pelo e-mail <a href={`mailto:${contactEmail}`} class={`${summaryLink} break-all`}>{contactEmail}</a>.</span></li>
+    </ul>
+  </section>
+
+  <p>
+    Esta Política de Privacidade explica como os seus dados pessoais são tratados quando você visita o site
+    <a href="/">www.paloma-santos.adv.br</a> ou entra em contato pelos canais nele indicados (WhatsApp, e-mail e Instagram),
+    em conformidade com a Lei Geral de Proteção de Dados Pessoais — LGPD (Lei nº 13.709/2018), o Marco Civil da Internet
+    (Lei nº 12.965/2014) e o Estatuto da Advocacia (Lei nº 8.906/1994).
+  </p>
+
+  <h2 id="controladora">1. Quem é a controladora dos dados</h2>
+  <p>
+    A controladora dos dados pessoais é <strong>Paloma Santos</strong>, advogada inscrita na OAB/SP sob o nº 490.797,
+    com atuação em São Paulo/SP e atendimento em todo o Brasil. Para qualquer assunto relacionado à privacidade e aos seus dados,
+    inclusive o exercício dos seus direitos, o canal de atendimento é o e-mail
+    <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+  </p>
+
+  <h2 id="dados-coletados">2. Quais dados são coletados</h2>
+  <h3>2.1. Dados que você fornece</h3>
+  <p>
+    O site não possui formulários de cadastro. Os dados chegam até a advogada apenas quando você decide entrar em contato
+    por WhatsApp, e-mail ou Instagram. Nesses casos, podem ser tratados:
+  </p>
+  <ul>
+    <li>nome, número de telefone, e-mail e perfil de rede social;</li>
+    <li>o conteúdo das mensagens, áudios e arquivos que você enviar;</li>
+    <li>
+      informações e documentos necessários à análise do seu caso, como CPF, dados de vínculos de trabalho, extratos do INSS (CNIS),
+      carteira de trabalho e contratos.
+    </li>
+  </ul>
+  <p>
+    Em casos de benefícios por incapacidade, BPC/LOAS e outros temas previdenciários, pode ser necessário tratar
+    <strong>dados pessoais sensíveis</strong>, como laudos, atestados e exames médicos. Esses dados são usados exclusivamente
+    para a análise e a defesa dos seus direitos, com cuidado reforçado de sigilo. Recomendamos que documentos sejam enviados
+    somente quando solicitados.
+  </p>
+
+  <h3>2.2. Dados coletados automaticamente durante a navegação</h3>
+  <ul>
+    <li>
+      <strong>Dados de uso e do dispositivo</strong>: páginas visitadas, tempo de navegação, origem do acesso (por exemplo, uma busca
+      ou um anúncio), tipo de navegador e dispositivo, localização aproximada (cidade/região) e cliques nos botões de contato.
+    </li>
+    <li>
+      <strong>Registros de acesso</strong>: endereço IP, data e hora de acesso, mantidos pelo provedor de hospedagem para fins de
+      segurança e funcionamento do site.
+    </li>
+  </ul>
+  <p>
+    Os dados de uso são coletados por ferramentas de terceiros descritas na <a href="#cookies">seção 7</a>, e os cookies de estatísticas e de
+    anúncios só são gravados com o seu consentimento.
+  </p>
+
+  <h2 id="finalidades">3. Para que os dados são usados e com qual base legal</h2>
+  <ul>
+    <li>
+      <strong>Responder ao seu contato e fazer a análise inicial do caso</strong> — base legal: procedimentos preliminares
+      relacionados a contrato, a pedido do titular (art. 7º, V, da LGPD).
+    </li>
+    <li>
+      <strong>Prestar os serviços jurídicos contratados</strong>, incluindo requerimentos administrativos (como no INSS) e ações
+      judiciais — bases legais: execução de contrato (art. 7º, V) e exercício regular de direitos em processo judicial,
+      administrativo ou arbitral (art. 7º, VI, e art. 11, II, “d”, para dados sensíveis).
+    </li>
+    <li>
+      <strong>Cumprir obrigações legais e regulatórias</strong>, como as previstas no Estatuto da Advocacia, no Código de Ética
+      e Disciplina da OAB e na legislação fiscal — base legal: art. 7º, II, e art. 11, II, “a”.
+    </li>
+    <li>
+      <strong>Medir a audiência do site e o desempenho de anúncios</strong>, para entender quais conteúdos são úteis e quais
+      campanhas trazem contatos — base legal: consentimento (art. 7º, I), dado por você no aviso de cookies e revogável a
+      qualquer momento (<a href="#cookies">seção 7</a>).
+    </li>
+  </ul>
+  <p>Os seus dados não são vendidos nem usados para finalidades diferentes das descritas aqui.</p>
+
+  <h2 id="sigilo">4. Sigilo profissional</h2>
+  <p>
+    Todas as informações que você compartilha sobre o seu caso estão protegidas pelo sigilo profissional do advogado
+    (art. 7º, II, da Lei nº 8.906/1994 e Código de Ética e Disciplina da OAB), mesmo que a contratação não se concretize.
+  </p>
+
+  <h2 id="compartilhamento">5. Com quem os dados podem ser compartilhados</h2>
+  <ul>
+    <li>
+      <strong>Órgãos públicos e o Poder Judiciário</strong> (como INSS, Justiça Federal, Justiça do Trabalho e Justiça Estadual),
+      somente na medida necessária para a condução do seu caso;
+    </li>
+    <li>
+      <strong>Fornecedores de tecnologia</strong> que viabilizam o atendimento e o site: Meta (WhatsApp e Instagram),
+      Google (Gmail, Google Analytics, Google Tag Manager, Google Ads e Google Fonts) e Vercel (hospedagem e estatísticas de acesso);
+    </li>
+    <li><strong>Autoridades</strong>, quando houver obrigação legal ou ordem judicial.</li>
+  </ul>
+
+  <h2 id="transferencia-internacional">6. Transferência internacional</h2>
+  <p>
+    Alguns dos fornecedores citados armazenam dados em servidores fora do Brasil, principalmente nos Estados Unidos.
+    Essas transferências ocorrem nas hipóteses permitidas pelo art. 33 da LGPD, com fornecedores que adotam cláusulas
+    contratuais e medidas de segurança compatíveis com a proteção exigida pela lei brasileira.
+  </p>
+
+  <h2 id="cookies">7. Cookies e tecnologias de medição</h2>
+  <p>
+    Cookies são pequenos arquivos gravados no seu navegador. Este site não usa cookies para identificar você pessoalmente;
+    eles servem para estatísticas de visita e para medir os resultados de anúncios.
+  </p>
+  <p>
+    Na sua primeira visita, um aviso pergunta se você aceita os cookies de <strong>estatísticas</strong> e de
+    <strong>anúncios</strong>. Até que você aceite, eles ficam desativados: as ferramentas do Google funcionam no
+    <a href="https://support.google.com/analytics/answer/9976101?hl=pt-BR" target="_blank" rel="noopener noreferrer">modo de consentimento</a>
+    e enviam, no máximo, sinais anônimos e sem cookies, sem identificar o seu navegador. Você pode mudar a sua escolha a
+    qualquer momento pelo link <button type="button" data-cookie-preferences class="cursor-pointer font-medium text-[#7D5F23] underline underline-offset-4 decoration-[#B8924A]/60 hover:text-[#1D2A3D]">Preferências de cookies</button>,
+    também disponível no rodapé de todas as páginas. A sua escolha fica salva apenas no seu navegador.
+  </p>
+  <div class="not-prose my-6 overflow-hidden rounded-lg border border-slate-200">
+    <table class="cookie-table w-full text-left text-sm" role="table">
+      <thead class="bg-slate-50 text-[#1D2A3D]" role="rowgroup">
+        <tr role="row">
+          <th scope="col" role="columnheader" class="px-4 py-3 font-semibold">Ferramenta</th>
+          <th scope="col" role="columnheader" class="px-4 py-3 font-semibold">Finalidade</th>
+          <th scope="col" role="columnheader" class="px-4 py-3 font-semibold">Cookies e duração</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-200 text-slate-600" role="rowgroup">
+        <tr role="row">
+          <th scope="row" role="rowheader" class="px-4 py-3 font-semibold text-[#1D2A3D]">Preferência de cookies</th>
+          <td role="cell" data-label="Finalidade" class="px-4 py-3">Guarda a sua escolha no aviso de cookies (essencial).</td>
+          <td role="cell" data-label="Cookies e duração" class="px-4 py-3">Armazenamento local <code>cookie-consent</code> — até você limpar os dados do navegador.</td>
+        </tr>
+        <tr role="row">
+          <th scope="row" role="rowheader" class="px-4 py-3 font-semibold text-[#1D2A3D]">Google Tag Manager</th>
+          <td role="cell" data-label="Finalidade" class="px-4 py-3">Gerencia o carregamento das ferramentas de medição abaixo.</td>
+          <td role="cell" data-label="Cookies e duração" class="px-4 py-3">Não grava cookies próprios.</td>
+        </tr>
+        <tr role="row">
+          <th scope="row" role="rowheader" class="px-4 py-3 font-semibold text-[#1D2A3D]">Google Analytics 4</th>
+          <td role="cell" data-label="Finalidade" class="px-4 py-3">Estatísticas de visitas, páginas acessadas e cliques nos botões de contato.</td>
+          <td role="cell" data-label="Cookies e duração" class="px-4 py-3"><code>_ga</code> e <code>_ga_*</code> — até 2 anos.</td>
+        </tr>
+        <tr role="row">
+          <th scope="row" role="rowheader" class="px-4 py-3 font-semibold text-[#1D2A3D]">Google Ads</th>
+          <td role="cell" data-label="Finalidade" class="px-4 py-3">Mede quantos contatos vieram de cada anúncio (conversões).</td>
+          <td role="cell" data-label="Cookies e duração" class="px-4 py-3"><code>_gcl_au</code> e <code>_gcl_aw</code> — até 90 dias.</td>
+        </tr>
+        <tr role="row">
+          <th scope="row" role="rowheader" class="px-4 py-3 font-semibold text-[#1D2A3D]">Vercel Analytics</th>
+          <td role="cell" data-label="Finalidade" class="px-4 py-3">Contagem agregada de visitas e desempenho do site.</td>
+          <td role="cell" data-label="Cookies e duração" class="px-4 py-3">Não usa cookies.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Você também pode bloquear ou apagar cookies nas configurações do seu navegador, sem prejuízo ao acesso
+    ao conteúdo do site. Também é possível impedir a coleta pelo Google Analytics com o
+    <a href="https://tools.google.com/dlpage/gaoptout?hl=pt-BR" target="_blank" rel="noopener noreferrer">complemento de desativação do Google Analytics</a>
+    e gerenciar anúncios personalizados em
+    <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">Minha Central de Anúncios do Google</a>.
+  </p>
+
+  <h2 id="retencao">8. Por quanto tempo os dados são guardados</h2>
+  <ul>
+    <li>
+      <strong>Contatos que não resultam em contratação</strong>: até 2 anos após a última mensagem, salvo se você pedir
+      a exclusão antes.
+    </li>
+    <li>
+      <strong>Clientes</strong>: durante toda a prestação do serviço e, após o seu término, pelo prazo necessário para
+      cumprir obrigações legais e para o exercício de direitos, em regra 5 anos (art. 25 da Lei nº 8.906/1994).
+    </li>
+    <li><strong>Dados de navegação</strong>: até 14 meses no Google Analytics; registros de acesso pelo prazo definido pelo provedor de hospedagem, para fins de segurança.</li>
+  </ul>
+  <p>Encerrados esses prazos, os dados são excluídos ou anonimizados.</p>
+
+  <h2 id="direitos">9. Seus direitos</h2>
+  <p>Nos termos do art. 18 da LGPD, você pode, a qualquer momento e gratuitamente:</p>
+  <ul>
+    <li>confirmar se os seus dados são tratados e ter acesso a eles;</li>
+    <li>corrigir dados incompletos, inexatos ou desatualizados;</li>
+    <li>pedir a anonimização, o bloqueio ou a eliminação de dados desnecessários ou tratados em desconformidade com a lei;</li>
+    <li>pedir a portabilidade dos dados a outro fornecedor de serviço;</li>
+    <li>saber com quem os seus dados foram compartilhados;</li>
+    <li>revogar o consentimento, quando o tratamento se basear nele, e se opor a tratamentos baseados em legítimo interesse.</li>
+  </ul>
+  <p>
+    Para exercer esses direitos, envie um e-mail para <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+    A resposta será enviada em até 15 dias. Alguns dados podem precisar ser mantidos mesmo após o pedido, quando houver
+    obrigação legal ou necessidade de defesa em processo. Você também pode apresentar reclamação à
+    <a href="https://www.gov.br/anpd/" target="_blank" rel="noopener noreferrer">Autoridade Nacional de Proteção de Dados (ANPD)</a>.
+  </p>
+
+  <h2 id="criancas">10. Dados de crianças e adolescentes</h2>
+  <p>
+    Em casos como pensão por morte, BPC/LOAS e pensão alimentícia, pode ser necessário tratar dados de crianças e adolescentes.
+    Esses dados são fornecidos pelos pais ou responsáveis legais e tratados sempre no melhor interesse da criança ou
+    do adolescente, conforme o art. 14 da LGPD.
+  </p>
+
+  <h2 id="seguranca">11. Segurança</h2>
+  <p>
+    São adotadas medidas técnicas e administrativas para proteger os seus dados contra acessos não autorizados, perda ou
+    vazamento, como conexão criptografada (HTTPS), acesso restrito às informações dos clientes e uso de serviços com
+    criptografia de ponta a ponta, como o WhatsApp. Nenhum sistema é totalmente imune a riscos; caso ocorra um incidente
+    de segurança relevante, você e a ANPD serão comunicados, conforme a lei.
+  </p>
+
+  <h2 id="alteracoes">12. Alterações desta política</h2>
+  <p>
+    Esta política pode ser atualizada para refletir mudanças na legislação ou nas ferramentas utilizadas. A data da
+    última atualização aparece no topo da página.
+  </p>
+
+  <p>
+    Veja também os <a href="/termos-de-uso">Termos de Uso</a> do site.
+  </p>
+</LegalPage>
+
+<style>
+  /* Below sm the cookie table stacks into one card per tool; data-label names each cell. */
+  @media (max-width: 639px) {
+    .cookie-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+    .cookie-table,
+    .cookie-table tbody,
+    .cookie-table tr,
+    .cookie-table th,
+    .cookie-table td {
+      display: block;
+    }
+    .cookie-table tr {
+      padding: 1rem;
+    }
+    .cookie-table th[scope='row'],
+    .cookie-table td {
+      padding: 0;
+    }
+    .cookie-table th[scope='row'] {
+      font-family: var(--font-family-serif, Lora, Georgia, serif);
+      font-size: 1rem;
+    }
+    .cookie-table td {
+      margin-top: 0.625rem;
+      font-size: 1rem;
+    }
+    .cookie-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #7d5f23;
+    }
+  }
+</style>

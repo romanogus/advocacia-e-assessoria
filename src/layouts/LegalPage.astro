@@ -1,0 +1,68 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Shown under the heading, e.g. "21 de outubro de 2026". */
+  updatedAt: string;
+  /** One entry per h2 in the slot; each h2 needs the matching id. */
+  sections: { id: string; title: string }[];
+}
+
+const { title, description, updatedAt, sections } = Astro.props;
+
+const contactEmail = 'advogada.palomasantos@gmail.com';
+const whatsappMessage = `Olá! Tenho uma dúvida sobre a página "${title}" do site.`;
+const whatsappUrl = `https://wa.me/5511955304453?text=${encodeURIComponent(whatsappMessage)}`;
+
+const tocLink = "block rounded px-2 py-2 text-slate-600 hover:text-[#1D2A3D] hover:bg-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7D5F23]";
+---
+
+<Layout title={`${title} — Paloma Santos Advocacia`} description={description}>
+  <header class="bg-slate-50 pt-12 pb-10 sm:pt-16 sm:pb-12 border-b border-slate-200/60">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-serif text-[#1D2A3D] tracking-tight leading-tight">
+        {title}
+      </h1>
+      <p class="mt-4 text-sm text-slate-600">Última atualização: {updatedAt}</p>
+    </div>
+  </header>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-10 sm:py-16 lg:grid lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
+    <!-- Desktop: sticky contents -->
+    <nav aria-label="Nesta página" class="hidden lg:block">
+      <div class="sticky top-24">
+        <p class="mb-2 px-2 font-serif font-semibold text-[#1D2A3D]">Nesta página</p>
+        <ol class="space-y-0.5 text-sm">
+          {sections.map((s) => <li><a href={`#${s.id}`} class={tocLink}>{s.title}</a></li>)}
+        </ol>
+      </div>
+    </nav>
+
+    <div class="min-w-0 max-w-3xl">
+      <!-- Mobile: collapsible contents -->
+      <details class="lg:hidden mb-8 rounded-xl border border-slate-200 bg-slate-50 [&[open]>summary_svg]:rotate-180">
+        <summary class="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 font-serif font-semibold text-[#1D2A3D] rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7D5F23] [&::-webkit-details-marker]:hidden">
+          Nesta página
+          <svg viewBox="0 0 24 24" class="size-5 shrink-0 text-[#7D5F23] transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+        </summary>
+        <nav aria-label="Nesta página" class="px-2 pb-3">
+          <ol class="text-base">
+            {sections.map((s) => <li><a href={`#${s.id}`} class={tocLink}>{s.title}</a></li>)}
+          </ol>
+        </nav>
+      </details>
+
+      <article class="prose prose-slate md:prose-lg prose-headings:font-serif prose-headings:text-[#1D2A3D] prose-headings:scroll-mt-24 prose-a:text-[#7D5F23] prose-a:decoration-[#B8924A]/60 prose-a:underline-offset-4 hover:prose-a:text-[#1D2A3D]">
+        <slot />
+      </article>
+
+      <p class="mt-12 border-t border-slate-200 pt-8 text-base leading-relaxed text-slate-600">
+        Ficou alguma dúvida sobre este documento?
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" data-analytics-placement="legal_page" class="font-semibold text-[#7D5F23] underline underline-offset-4 decoration-[#B8924A]/60 hover:text-[#1D2A3D] rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7D5F23]">Fale com a advogada pelo WhatsApp<span class="sr-only"> (abre em nova aba)</span></a>
+        ou escreva para <a href={`mailto:${contactEmail}`} class="font-semibold text-[#7D5F23] underline underline-offset-4 decoration-[#B8924A]/60 hover:text-[#1D2A3D] break-all rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7D5F23]">{contactEmail}</a>.
+      </p>
+    </div>
+  </div>
+</Layout>

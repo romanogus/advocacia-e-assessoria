@@ -1,6 +1,4 @@
 ---
-import { siInstagram } from 'simple-icons';
-
 interface Props {
   placement: 'sobre' | 'author_bio' | 'footer';
   /** Surface the link sits on: picks a focus ring that clears 3:1 against it. */
@@ -30,8 +28,5 @@ const instagramUrl = `https://www.instagram.com/${instagramHandle}/`;
     className,
   ]}
 >
-  <svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d={siInstagram.path} />
-  </svg>
-  <span>{!labelled && <span class="sr-only">Instagram </span>}@{instagramHandle}<span class="sr-only"> (abre em nova aba)</span></span>
+  <span>{!labelled && <>Instagram: </>}@{instagramHandle}<span class="sr-only"> (abre em nova aba)</span></span>
 </a>

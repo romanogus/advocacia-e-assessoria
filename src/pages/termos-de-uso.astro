@@ -1,0 +1,115 @@
+---
+export const prerender = true;
+
+import LegalPage from '../layouts/LegalPage.astro';
+
+const contactEmail = 'advogada.palomasantos@gmail.com';
+
+const sections = [
+  { id: 'finalidade', title: '1. Finalidade do site' },
+  { id: 'conteudo-informativo', title: '2. Conteúdo informativo' },
+  { id: 'contratacao', title: '3. Contato e contratação' },
+  { id: 'resultado', title: '4. Sem promessa de resultado' },
+  { id: 'atendimento-digital', title: '5. Atendimento digital' },
+  { id: 'propriedade-intelectual', title: '6. Propriedade intelectual' },
+  { id: 'links', title: '7. Links para outros sites' },
+  { id: 'disponibilidade', title: '8. Disponibilidade' },
+  { id: 'privacidade', title: '9. Privacidade' },
+  { id: 'alteracoes', title: '10. Alterações' },
+  { id: 'foro', title: '11. Legislação e foro' },
+  { id: 'contato-termos', title: '12. Contato' },
+];
+---
+
+<LegalPage
+  title="Termos de Uso"
+  description="Condições de uso do site de Paloma Santos — Advocacia Especializada (OAB/SP 490.797): conteúdo informativo, atendimento digital e propriedade intelectual."
+  updatedAt="21 de outubro de 2026"
+  sections={sections}
+>
+  <p>
+    Estes Termos de Uso regulam o acesso ao site <a href="/">www.paloma-santos.adv.br</a>, mantido por
+    <strong>Paloma Santos</strong>, advogada inscrita na OAB/SP sob o nº 490.797. Ao usar este site, valem as condições abaixo.
+  </p>
+
+  <h2 id="finalidade">1. Finalidade do site</h2>
+  <p>
+    Este site tem caráter exclusivamente informativo, em conformidade com o Código de Ética e Disciplina da OAB e o
+    Provimento nº 205/2021 do Conselho Federal da OAB. Ele apresenta as áreas de atuação da advogada, conteúdos jurídicos
+    de interesse geral e os canais de contato para atendimento.
+  </p>
+
+  <h2 id="conteudo-informativo">2. Conteúdo informativo não é consulta jurídica</h2>
+  <p>
+    Os textos do site e do blog têm finalidade educativa e tratam dos temas de forma geral. Eles não substituem a análise
+    individual do seu caso por um profissional, que depende dos seus documentos e da sua situação específica. A legislação
+    e o entendimento dos tribunais mudam com frequência, e um conteúdo publicado pode ficar desatualizado. Antes de tomar
+    qualquer decisão, procure orientação jurídica.
+  </p>
+
+  <h2 id="contratacao">3. Contato não estabelece contratação</h2>
+  <p>
+    Enviar uma mensagem por WhatsApp, e-mail ou Instagram não cria, por si só, uma relação entre advogada e cliente.
+    A contratação só se formaliza com a assinatura do contrato de honorários e da procuração, quando cabíveis. Os honorários
+    são combinados de forma individual e por escrito, observada a Tabela de Honorários da OAB/SP.
+  </p>
+
+  <h2 id="resultado">4. Não há promessa de resultado</h2>
+  <p>
+    A advocacia é uma atividade de meio: a advogada se compromete a atuar com técnica, diligência e ética na defesa dos
+    seus interesses, mas o resultado de um requerimento administrativo ou de um processo judicial depende de fatores que
+    não estão sob o seu controle, como as provas disponíveis e as decisões de órgãos públicos e do Poder Judiciário.
+    Por isso, nenhuma informação deste site deve ser entendida como garantia de êxito.
+  </p>
+
+  <h2 id="atendimento-digital">5. Atendimento digital</h2>
+  <p>
+    O atendimento é realizado de forma 100% digital, por WhatsApp, videochamada e e-mail, para clientes de qualquer
+    município do Brasil. Os horários de atendimento estão informados no rodapé do site. O WhatsApp e o Instagram são
+    serviços de terceiros, sujeitos aos seus próprios termos e políticas de privacidade. Recomendamos que você envie
+    documentos somente quando forem solicitados.
+  </p>
+
+  <h2 id="propriedade-intelectual">6. Propriedade intelectual</h2>
+  <p>
+    Os textos, artigos, a marca, o logotipo, as fotografias e o design deste site são protegidos pela Lei de Direitos
+    Autorais (Lei nº 9.610/1998) e pela Lei de Propriedade Industrial (Lei nº 9.279/1996). Você pode compartilhar os
+    links das páginas livremente. A reprodução total ou parcial do conteúdo depende de autorização prévia e, quando
+    autorizada, deve citar a fonte.
+  </p>
+
+  <h2 id="links">7. Links para outros sites</h2>
+  <p>
+    O site pode conter links para páginas de terceiros, como órgãos públicos, tribunais e redes sociais. Esses sites
+    possuem regras próprias, e a advogada não se responsabiliza pelo seu conteúdo ou pelas suas práticas de privacidade.
+  </p>
+
+  <h2 id="disponibilidade">8. Disponibilidade</h2>
+  <p>
+    São empregados esforços para manter o site disponível e com informações corretas, mas podem ocorrer interrupções
+    temporárias para manutenção ou por falhas de terceiros, como provedores de hospedagem e de internet.
+  </p>
+
+  <h2 id="privacidade">9. Privacidade</h2>
+  <p>
+    O tratamento dos seus dados pessoais está descrito na <a href="/politica-de-privacidade">Política de Privacidade</a>,
+    que faz parte destes Termos.
+  </p>
+
+  <h2 id="alteracoes">10. Alterações</h2>
+  <p>
+    Estes Termos podem ser atualizados a qualquer momento. A versão vigente é sempre a publicada nesta página, com a data
+    da última atualização indicada no topo.
+  </p>
+
+  <h2 id="foro">11. Legislação e foro</h2>
+  <p>
+    Estes Termos são regidos pelas leis brasileiras. Fica eleito o foro da comarca de São Paulo/SP para resolver eventuais
+    controvérsias, ressalvadas as hipóteses em que a lei estabeleça foro diverso.
+  </p>
+
+  <h2 id="contato-termos">12. Contato</h2>
+  <p>
+    Dúvidas sobre estes Termos podem ser enviadas para <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+  </p>
+</LegalPage>
